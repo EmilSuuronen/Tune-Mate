@@ -12,8 +12,6 @@
     "build": "tsc",
     "start": "node dist/app.ts",
     "dev": "nodemon app.ts",
-    "copyGraphql": "copyfiles --error src/api/schemas/*.graphql dist",
-    "postbuild": "npm run copyGraphql",
     "lint": "eslint --fix src test",
     "test": "jest --detectOpenHandles --forceExit"
   }

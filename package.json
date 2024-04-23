@@ -2,8 +2,8 @@
   "name": "my-fullstack-app",
   "version": "1.0.0",
   "scripts": {
-    "start": "node /server/app.ts",
-    "build": "cd client && npm install && npm run build && cd ../server && npm install",
+    "start": "node server/dist/app.js",
+    "build": "cd client && npm install && npm run build && cd ../server && npm install && npm run build",
     "dev": "nodemon server/app.ts"
   },
   "devDependencies": {
