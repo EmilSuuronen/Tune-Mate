@@ -1,16 +1,44 @@
 import express from 'express';
+import { ApolloServer } from '@apollo/server';
+import dotenv from 'dotenv';
+import { expressMiddleware } from '@apollo/server/express4';
+import cors from 'cors';
+
+dotenv.config();
 const path = require('path');
+const typeDefs = require('./api/types/typeDefs');
+const resolvers = require('./api/resolvers/userResolver');
 const app = express();
-
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../../client/build')));
-
-// Handle React routing, return all requests to React app
-app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
-});
-
 const port = process.env.PORT || 8080;
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
+
+(async () => {
+    const server = new ApolloServer({
+        typeDefs: typeDefs,
+        resolvers: resolvers,
+    });
+
+    await server.start()
+
+    app.use('/graphql', cors<cors.CorsRequest>(), express.json(), expressMiddleware(server));
+
+    if (process.env.NODE_ENV === 'development') {
+        app.use(express.static(path.join(__dirname, '../../client/build')));
+    } else {
+        app.use(express.static(path.join(__dirname, '../../client/build')));
+    }
+
+    app.get('*', function (req, res) {
+        if (process.env.NODE_ENV === 'development') {
+            res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
+        } else {
+            res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
+        }
+    });
+
+    app.listen(port, () => {
+        console.log(`Server running on port ${port}`);
+    });
+})();
+
+
+
