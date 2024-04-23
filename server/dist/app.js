@@ -12,7 +12,7 @@ app.use(express_1.default.static(path.join(__dirname, '../../client/build')));
 app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
 });
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
