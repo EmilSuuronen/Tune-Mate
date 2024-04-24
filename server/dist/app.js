@@ -12,7 +12,6 @@ const schemas_1 = __importDefault(require("./src/api/schemas"));
 const resolvers_1 = __importDefault(require("./src/api/resolvers"));
 const db_1 = __importDefault(require("./src/utils/db"));
 const helmet_1 = __importDefault(require("helmet"));
-const authenticate_1 = __importDefault(require("./src/functions/authenticate"));
 dotenv_1.default.config();
 const path = require('path');
 const app = (0, express_1.default)();
@@ -35,7 +34,7 @@ const port = process.env.PORT || 8080;
     await server.start();
     app.use('/graphql', (0, cors_1.default)(), express_1.default.json(), (0, express4_1.expressMiddleware)(server, {
         context: ({ res }) => res.locals.user,
-    }), authenticate_1.default);
+    }));
     try {
         await (0, db_1.default)();
     }

@@ -8,8 +8,6 @@ import resolvers from "./src/api/resolvers";
 import mongoConnect from "./src/utils/db";
 import {MyContext} from "./src/types/MyContext";
 import helmet from 'helmet';
-import authenticate from "./src/functions/authenticate";
-
 
 dotenv.config();
 const path = require('path');
@@ -43,8 +41,7 @@ const port = process.env.PORT || 8080;
         express.json(),
         expressMiddleware(server, {
             context: ({res}) => res.locals.user,
-        }),
-        authenticate
+        })
     );
 
     try {

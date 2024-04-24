@@ -1,7 +1,7 @@
 import {GraphQLError} from 'graphql';
 import {User, UserInput} from '../../types/typeDefs';
 import userModel from "../models/userModel";
-
+import bcrypt from 'bcrypt';
 
 export default {
     Query: {
@@ -25,11 +25,12 @@ export default {
             _parent: undefined,
             args: { input: UserInput },
         ): Promise<User> => {
+            const hashedPassword = await bcrypt.hash(args.input.password, 10);
             return await userModel.create(
                 {
                     user_name: args.input.user_name,
                     email: args.input.email,
-                    password: args.input.password
+                    password: hashedPassword
                 }
             );
         }
