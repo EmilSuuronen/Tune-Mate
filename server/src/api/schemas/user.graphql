@@ -5,43 +5,17 @@ type User {
   password: String!
 }
 
-type LoginResponse {
-  token: String
-  message: String!
-  user: User!
-}
-
-type UserResponse {
-  message: String!
-  user: User!
-}
-
-input Credentials {
-  username: String!
-  password: String!
-}
-
 input UserInput {
   user_name: String!
   email: String!
   password: String!
 }
 
-input UserModify {
-  user_name: String
-  email: String
-  password: String
-}
-
 type Query {
-  users: [User]
-  userById(id: ID!): User
-  checkToken: UserResponse
+  users: [User],
+  user(id: ID!): User,
 }
 
 type Mutation {
-  login(credentials: Credentials!): LoginResponse
-  createUser(user_name: String!, email: String!, password: String!): User
-  updateUser(user: UserModify!): UserResponse
-  deleteUser: UserResponse
+  createUser(input: UserInput!): User
 }
