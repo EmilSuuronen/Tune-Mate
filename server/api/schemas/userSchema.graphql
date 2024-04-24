@@ -1,0 +1,40 @@
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    password: String!
+}
+
+input UserInput {
+    user_name: String!
+    email: String!
+    password: String!
+}
+
+type LoginResponse {
+    token: String
+    message: String!
+    user: User!
+}
+
+type Query {
+    users: [User]
+    userById(id: ID!): User
+    checkToken: UserResponse
+}
+
+input Credentials {
+    username: String!
+    password: String!
+}
+
+type UserResponse {
+    message: String!
+    user: User!
+}
+
+type Mutation {
+    login(credentials: Credentials!): LoginResponse
+    register(user: UserInput!): UserResponse
+    deleteUser: UserResponse
+}

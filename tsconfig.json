@@ -21,6 +21,7 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "client/**/*", "server/**/*", "./*.ts", "client/**/*.ts", "client/**/*.js", "client/*.ts", "server/**/*.ts", "server/**/*.js", "server/*.ts"
+    "client/**/*", "server/**/*", "./*.ts", "client/**/*.ts", "client/**/*.js", "client/*.ts", "server/**/*.ts",
+    "server/**/*.js", "server/*.ts", "*.graphql",
     ]
     }

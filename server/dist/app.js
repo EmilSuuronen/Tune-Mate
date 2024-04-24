@@ -10,26 +10,26 @@ const express4_1 = require("@apollo/server/express4");
 const cors_1 = __importDefault(require("cors"));
 dotenv_1.default.config();
 const path = require('path');
-const typeDefs = require('./api/types/typeDefs');
+const typeDefs = require('./api/schemas/index');
 const resolvers = require('./api/resolvers/userResolver');
 const app = (0, express_1.default)();
 const port = process.env.PORT || 8080;
 (async () => {
     const server = new server_1.ApolloServer({
-        typeDefs: typeDefs,
-        resolvers: resolvers,
+        typeDefs,
+        resolvers,
     });
     await server.start();
     app.use('/graphql', (0, cors_1.default)(), express_1.default.json(), (0, express4_1.expressMiddleware)(server));
     if (process.env.NODE_ENV === 'development') {
-        app.use(express_1.default.static(path.join(__dirname, '../../client/build')));
+        app.use(express_1.default.static(path.join(__dirname, '../../Tune-Mate/client/build')));
     }
     else {
-        app.use(express_1.default.static(path.join(__dirname, '../client/build')));
+        app.use(express_1.default.static(path.join(__dirname, '../../client/build')));
     }
     app.get('*', function (req, res) {
         if (process.env.NODE_ENV === 'development') {
-            res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
+            res.sendFile(path.join(__dirname, '../../Tune-Mate/client/build', 'index.html'));
         }
         else {
             res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));

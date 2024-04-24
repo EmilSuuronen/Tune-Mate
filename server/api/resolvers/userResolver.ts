@@ -1,10 +1,10 @@
-const resolvers = {
+import {User} from "../types/userType";
+
+export default {
     Query: {
-        getUserById: () => {
-            return "Test User 1"
-        }
+
+    },
+    Mutation: {
+
     }
-}
-
-module.exports = resolvers;
-
+};

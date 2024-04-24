@@ -6,15 +6,15 @@ import cors from 'cors';
 
 dotenv.config();
 const path = require('path');
-const typeDefs = require('./api/types/typeDefs');
-const resolvers = require('./api/resolvers/userResolver');
+const typeDefs = require('./api/schemas/index');
+const resolvers = require('./api/resolvers/index');
 const app = express();
 const port = process.env.PORT || 8080;
 
 (async () => {
     const server = new ApolloServer({
-        typeDefs: typeDefs,
-        resolvers: resolvers,
+        typeDefs,
+        resolvers,
     });
 
     await server.start()
@@ -22,14 +22,14 @@ const port = process.env.PORT || 8080;
     app.use('/graphql', cors<cors.CorsRequest>(), express.json(), expressMiddleware(server));
 
     if (process.env.NODE_ENV === 'development') {
-        app.use(express.static(path.join(__dirname, '../../client/build')));
+        app.use(express.static(path.join(__dirname, '../../Tune-Mate/client/build')));
     } else {
         app.use(express.static(path.join(__dirname, '../../client/build')));
     }
 
     app.get('*', function (req, res) {
         if (process.env.NODE_ENV === 'development') {
-            res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
+            res.sendFile(path.join(__dirname, '../../Tune-Mate/client/build', 'index.html'));
         } else {
             res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
         }
