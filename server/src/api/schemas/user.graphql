@@ -11,6 +11,16 @@ input UserInput {
   password: String!
 }
 
+input LoginInput {
+  user_name: String
+  password: String
+}
+
+type LoginResponse {
+  token: String
+  user: User
+}
+
 type Query {
   users: [User],
   user(id: ID!): User,
@@ -18,4 +28,5 @@ type Query {
 
 type Mutation {
   createUser(input: UserInput!): User
+  loginUser(input: LoginInput!): LoginResponse
 }

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const Home = () => {
     return(
         <div>
-            <h1>TuneMate</h1>
+            <h1>TuneMate Home page</h1>
         </div>
     );
 };

@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const graphql_1 = require("graphql");
 const userModel_1 = __importDefault(require("../models/userModel"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 exports.default = {
     Query: {
         users: async () => {
@@ -27,6 +29,21 @@ exports.default = {
                 email: args.input.email,
                 password: hashedPassword
             });
+        },
+        loginUser: async (_parent, args) => {
+            const user = await userModel_1.default.findOne({ user_name: args.input.user_name });
+            if (!user) {
+                throw new graphql_1.GraphQLError('User not found');
+            }
+            const valid = await bcrypt_1.default.compare(args.input.password, user.password);
+            if (!valid) {
+                throw new graphql_1.GraphQLError('Invalid password');
+            }
+            const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
+            return {
+                token,
+                user
+            };
         }
     }
 };
