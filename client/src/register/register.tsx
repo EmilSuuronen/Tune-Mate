@@ -3,11 +3,9 @@ import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 import { useMutation } from '@apollo/client';
 import {CREATE_USER} from "../graphql/userTypes";
 import {useNavigate} from "react-router-dom";
-const navigate = useNavigate();
 
 const Register = () => {
     const navigate = useNavigate()
-
     const [formData, setFormData] = useState({
         user_name: '',
         email: '',
@@ -27,7 +25,7 @@ const Register = () => {
         e.preventDefault();
         try {
             await createUser({ variables: { input: formData } });
-            navigate('/register');
+            navigate('/home');
         } catch (err) {
             console.error('Error creating user:', err);
         }

@@ -1,5 +1,5 @@
 import {GraphQLError} from 'graphql';
-import {User, UserInput, LoginInput} from '../../types/typeDefs';
+import {User, UserInput, LoginInput, QueryByIdInput} from '../../types/typeDefs';
 import userModel from "../models/userModel";
 import bcrypt from 'bcrypt';
 const jwt = require('jsonwebtoken');
@@ -12,9 +12,9 @@ export default {
         },
         user: async (
             _parent: undefined,
-            args: { id: string }
+            args: { input: QueryByIdInput}
         ) => {
-            const user = await userModel.findById(args.id);
+            const user = await userModel.findById(args.input.id);
             if (!user) {
                 throw new GraphQLError('User not found');
             }

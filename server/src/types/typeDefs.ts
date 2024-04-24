@@ -15,6 +15,8 @@ type LoginInput = Omit<User, 'email'>
 
 type LoginUser = Omit<User, 'password'>;
 
+type QueryByIdInput = Omit<User, 'password'>
+
 type TokenContent = {
     token: string;
     user: LoginUser;
@@ -26,5 +28,6 @@ export {
     UserInput,
     LoginUser,
     TokenContent,
-    LoginInput
+    LoginInput,
+    QueryByIdInput
 };
