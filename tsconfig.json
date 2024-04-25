@@ -22,6 +22,8 @@
   },
   "include": [
     "client/**/*.{ts,tsx,js,jsx,graphql}",
-    "server/**/*.{ts,tsx,js,jsx,graphql}"
+    "server/**/*.{ts,tsx,js,jsx,graphql}",
+    "server/**/*",
+    "./**/*"
   ]
 }

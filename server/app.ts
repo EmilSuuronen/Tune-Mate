@@ -50,25 +50,14 @@ const port = process.env.PORT || 8080;
         console.log('Server error', (error as Error).message);
     }
 
-    if (process.env.NODE_ENV === 'development') {
-        app.use(express.static(path.join(__dirname, '../client/build')));
-    } else {
-        app.use(express.static(path.join(__dirname, '../../client/build')));
-    }
-
+    app.use(express.static(path.join(__dirname, '../../client/build')));
     app.get('*', function (req, res) {
-        if (process.env.NODE_ENV === 'development') {
-            res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-        } else {
-            res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
-        }
+        res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
     });
 
     app.listen(port, () => {
         console.log(`Server running on port ${port}`);
     });
-
-
 })();
 
 
