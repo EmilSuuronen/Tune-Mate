@@ -33,18 +33,20 @@ function Login() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Username:</label>
-                <input type="text" name="user_name" value={formData.user_name} onChange={handleChange} required />
-            </div>
-            <div>
-                <label>Password:</label>
-                <input type="password" name="password" value={formData.password} onChange={handleChange} required />
-            </div>
-            <button type="submit" disabled={loading}>Log in</button>
-            {error && <p>Error: {error.message}</p>}
-        </form>
+        <div className="div-form-content-centered">
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>Username:</label>
+                    <input type="text" name="user_name" value={formData.user_name} onChange={handleChange} required className='input-rounded'/>
+                </div>
+                <div>
+                    <label>Password:</label>
+                    <input type="password" name="password" value={formData.password} onChange={handleChange} required className='input-rounded'/>
+                </div>
+                <button type="submit" disabled={loading} className="button-color">Log in</button>
+                {error && <p>Error: {error.message}</p>}
+            </form>
+        </div>
     );
 }
 
