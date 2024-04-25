@@ -1,13 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Register from "./register/register";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import Home from "./Home/home";
 import {ApolloProvider} from "@apollo/client";
 import client from "./graphql/apolloClient";
-import Login from "./login/login";
+import './App.css';
 import './styles/styles.css'
+import DashBoard from "./dashboard/dashboard";
+import Login from "./login/login";
+import Home from "./Home/home";
+import Register from "./register/register";
+import TabCreator from "./tabCreator/tabCreator";
+
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
                       <Route path="/register" element={<Register/>}/>
                       <Route path="/login" element={<Login/>}/>
                       <Route path="/" element={<Home/>}/>
+                      <Route path="/dashboard" element={<DashBoard/>}/>
+                      <Route path="/tabCreator" element={<TabCreator/>}/>
                   </Routes>
               </BrowserRouter>
           </ApolloProvider>
