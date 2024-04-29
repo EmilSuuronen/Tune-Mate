@@ -22,6 +22,19 @@ type TokenContent = {
     user: LoginUser;
 };
 
+// tablature definitions
+type Note = Partial<Document> & {
+    string: string;
+    position: number;
+    fret: number;
+};
+type Tablature = Partial<Document> & {
+    id: Types.ObjectId | string;
+    tablature_name: string;
+    tempo: string;
+    Notes: [Note];
+};
+
 export {
     User,
     UserOutput,

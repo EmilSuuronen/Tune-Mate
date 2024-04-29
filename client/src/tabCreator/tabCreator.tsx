@@ -1,9 +1,56 @@
-import React from 'react'
+import React, {useState} from "react";
+import Note from "./Tablature";
+import './tabCreator.css';
 
-function TabCreator() {
-    return(
-        <p>tatag</p>
+const TabCreator: React.FC = () => {
+    const [noteState, setNoteState] = useState(new Note());
+    const [tablatureDisplay, setTablatureDisplay] = useState<string>("");
+
+    const handleNoteChange = (string: number, position: number, value: string) => {
+        noteState.setNote(string, position, value);
+
+        // Create a new instance of Note, retaining the current noteState.
+        const newNoteState = new Note();
+
+        // Copy all existing notes into the new instance.
+        for (let i = 1; i <= 6; i++) {
+            newNoteState.strings[i] = [...noteState.strings[i]];
+        }
+
+        setNoteState(newNoteState); // Set the new instance as state.
+        setTablatureDisplay(noteState.toString());
+    };
+
+    const stringNames = ["E", "A", "D", "G", "B", "e"];
+
+    const renderStringFields = (string: number) => {
+        return (
+            <div key={`string-${string}`} className="div-editor-container-string">
+                <h4 className="h4-string-name">{stringNames[string - 1]}</h4>
+                {noteState.strings[string].map((noteValue, position) => (
+                    <input
+                        key={`string-${string}-pos-${position}`}
+                        type="text"
+                        value={noteValue === "-" ? "" : noteValue}
+                        placeholder="-"
+                        className="input-note-edit"
+                        id={position % 4 == 0 ? "input-background-bar" : undefined}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleNoteChange(string, position, e.target.value)}
+                    />
+                ))}
+            </div>
+        );
+    };
+
+    return (
+        <div>
+            <h3>Note Editor</h3>
+            {Array.from({length: 6}, (_, i) => renderStringFields(i + 1))} {/* Render 6 strings. */}
+            <div className="tablature-display">
+                <pre>{tablatureDisplay}</pre> {/* Display the tablature as preformatted text */}
+            </div>
+        </div>
     );
-}
+};
 
-export default TabCreator
+export default TabCreator;
