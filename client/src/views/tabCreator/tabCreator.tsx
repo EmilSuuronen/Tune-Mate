@@ -25,7 +25,7 @@ const TabCreator: React.FC = () => {
 
         setNoteState(newNoteState); // Set the new instance as state.
         setTablatureDisplay(noteState.toString());
-        console.log(noteState.strings[1])
+        console.log(noteState)
     };
 
     const stringNames = ["E", "A", "D", "G", "B", "e"];
@@ -52,7 +52,7 @@ const TabCreator: React.FC = () => {
 
     return (
         <div className="div-tab-editor-main-container">
-            <TopAppBar/>
+            <TopAppBar noteState={noteState}/>
             <h3>Note Editor</h3>
             {Array.from({length: 6}, (_, i) => renderStringFields(i + 1))}
             <div className="tablature-display">

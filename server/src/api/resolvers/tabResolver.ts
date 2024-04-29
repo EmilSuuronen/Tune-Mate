@@ -1,26 +1,13 @@
 import tabModel from "../models/tabModel";
 import {QueryByIdInput, Tab} from "../../types/typeDefs";
 import {GraphQLError} from "graphql";
-import {User, UserInput, LoginInput, QueryTabByIdInput, TabInput} from '../../types/typeDefs';
-import userModel from "../models/userModel";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import {QueryTabByIdInput, TabInput} from '../../types/typeDefs';
 
 export default {
     Query: {
         tabs: async () => {
             return tabModel.find();
         },
-        tab: async (
-            _parent: undefined,
-            args: { input: QueryTabByIdInput}
-        ) => {
-            const tab = await tabModel.findById(args.input.id);
-            if (!tab) {
-                throw new GraphQLError('User not found');
-            }
-            return tab;
-        }
     },
     Mutation: {
         createTab: async (
@@ -30,7 +17,7 @@ export default {
             return await tabModel.create(
                 {
                     tempo: args.input.tempo,
-                    tab_name: args.input.tab_name,
+                    name: args.input.name,
                     string1: args.input.string1,
                     string2: args.input.string2,
                     string3: args.input.string3,

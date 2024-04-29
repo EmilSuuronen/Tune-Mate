@@ -26,7 +26,7 @@ type Tab = Partial<Document & {
     id: Types.ObjectId | string;
     owner: Types.ObjectId;
     tempo: number;
-    tab_name: string;
+    name: string;
     string1: [string];
     string2: [string];
     string3: [string];
@@ -38,7 +38,7 @@ type Tab = Partial<Document & {
 type TabInput = {
     owner: Types.ObjectId;
     tempo: number;
-    tab_name: string;
+    name: string;
     string1: [string];
     string2: [string];
     string3: [string];
@@ -52,7 +52,7 @@ type QueryTabByIdInput = Tab
 type TabOutput = {
     id: string;
     tempo: number;
-    tab_name: string;
+    name: string;
     string1: [string];
     string2: [string];
     string3: [string];

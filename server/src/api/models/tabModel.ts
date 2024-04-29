@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import {Tab} from "../../types/typeDefs";
 
 const TabModel = new mongoose.Schema<Tab>({
-    tab_name: {
+    name: {
         type: String,
         required: true,
     },

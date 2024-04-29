@@ -24,7 +24,7 @@ const Register = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            await createUser({ variables: { input: formData } });
+            await createUser({ variables: { input: formData} });
             navigate('/home');
         } catch (err) {
             console.error('Error creating user:', err);

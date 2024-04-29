@@ -1,6 +1,6 @@
 type Tab {
     id: ID!
-    tab_name: String!
+    name: String!
     tempo: Int!
     string1: [String]!
     string2: [String]!
@@ -8,4 +8,23 @@ type Tab {
     string4: [String]!
     string5: [String]!
     string6: [String]!
+}
+
+input TabInput {
+    name: String!
+    tempo: Int!
+    string1: [String]!
+    string2: [String]!
+    string3: [String]!
+    string4: [String]!
+    string5: [String]!
+    string6: [String]!
+}
+
+type Query {
+    tabs: [Tab],
+}
+
+type Mutation {
+    createTab(input: TabInput!): Tab
 }
