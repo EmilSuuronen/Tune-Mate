@@ -1,4 +1,4 @@
-export default class Note {
+export default class Tablature {
     strings: Record<number, string[]>; // Dictionary where keys are string numbers and values are arrays of notes.
 
     constructor() {
@@ -11,7 +11,7 @@ export default class Note {
     }
 
     setNote(string: number, position: number, noteValue: string) {
-        if (string < 1 || string > 6 || position < 0 || position > 127) {
+        if (string < 1 || string > 6 || position < 0 || position > 47) {
             console.error("Invalid string or position value.");
             return;
         }
@@ -19,7 +19,7 @@ export default class Note {
     }
 
     getNote(string: number, position: number): string {
-        if (string < 1 || string > 6 || position < 0 || position > 127) {
+        if (string < 1 || string > 6 || position < 0 || position > 47) {
             console.error("Invalid string or position value.");
         }
         return this.strings[string][position];

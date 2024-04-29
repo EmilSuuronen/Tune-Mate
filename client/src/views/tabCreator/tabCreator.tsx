@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
-import Note from "./Tablature";
+import Tablature from "./Tablature";
 import './tabCreator.css';
 import SideNav from "../../components/sidenav/sidenav";
 import TopAppBar from "../../components/topAppBar/topAppBar";
 
 const TabCreator: React.FC = () => {
-    const [noteState, setNoteState] = useState(new Note());
+    const [noteState, setNoteState] = useState(new Tablature());
     const [tablatureDisplay, setTablatureDisplay] = useState<string>("");
 
     useEffect(() => {
@@ -16,7 +16,7 @@ const TabCreator: React.FC = () => {
         noteState.setNote(string, position, value);
 
         // Create a new instance of Note, retaining the current noteState.
-        const newNoteState = new Note();
+        const newNoteState = new Tablature();
 
         // Copy all existing notes into the new instance.
         for (let i = 1; i <= 6; i++) {
@@ -25,6 +25,7 @@ const TabCreator: React.FC = () => {
 
         setNoteState(newNoteState); // Set the new instance as state.
         setTablatureDisplay(noteState.toString());
+        console.log(noteState.strings[1])
     };
 
     const stringNames = ["E", "A", "D", "G", "B", "e"];
@@ -42,6 +43,7 @@ const TabCreator: React.FC = () => {
                         className="input-note-edit"
                         id={position % 4 == 0 ? "input-background-bar" : undefined}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleNoteChange(string, position, e.target.value)}
+                        maxLength={2}
                     />
                 ))}
             </div>

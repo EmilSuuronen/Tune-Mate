@@ -1,19 +1,41 @@
 import mongoose from 'mongoose';
-import {User} from "../../types/typeDefs";
+import {Tab} from "../../types/typeDefs";
 
-const UserModel = new mongoose.Schema<User>({
-    user_name: {
+const TabModel = new mongoose.Schema<Tab>({
+    tab_name: {
         type: String,
         required: true,
     },
-    email: {
+    tempo: {
         type: String,
         required: true,
     },
-    password: {
-        type: String,
+    string1: {
+        type: [String],
+        required: true,
+    },
+    string2: {
+        type: [String],
+        required: true,
+    },
+    string3: {
+        type: [String],
+        required: true,
+    },
+    string4: {
+        type: [String],
+        required: true,
+    },
+    string5: {
+        type: [String],
+        required: true,
+    },
+    string6: {
+        type: [String],
         required: true,
     },
 });
 
-export default mongoose.model<User>('User', UserModel);
+const NoteModel = mongoose.model("Tab", TabModel);
+
+export default NoteModel;

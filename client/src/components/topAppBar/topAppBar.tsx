@@ -15,12 +15,16 @@ function TopAppBar() {
         });
     };
 
+    function handleOnSaveClick() {
+        console.log("saved");
+    }
+
     return (
         <div className='div-top-app-bar-main'>
             <h2 className="top-app-bar-main-text">TuneMate</h2>
             <input name="name" value={formData.tab_name} onChange={handleChange} className='input-project-name' placeholder="name"/>
-            <input name="tempo" value={formData.tab_tempo} onChange={handleChange} className='input-project-tempo' placeholder="name"/>
-            <button className="button-color">Save</button>
+            <input name="tempo" value={formData.tab_tempo} onChange={handleChange} className='input-project-tempo' placeholder="tempo"/>
+            <button className="button-color" onClick={handleOnSaveClick}>Save</button>
         </div>
     );
 }

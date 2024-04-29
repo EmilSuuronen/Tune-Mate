@@ -1,4 +1,4 @@
-import {Document, Types} from 'mongoose';
+import mongoose, {Document, Types} from 'mongoose';
 
 type User = Partial<Document> & {
     id: Types.ObjectId | string;
@@ -22,18 +22,44 @@ type TokenContent = {
     user: LoginUser;
 };
 
-// tablature definitions
-type Note = Partial<Document> & {
-    string: string;
-    position: number;
-    fret: number;
-};
-type Tablature = Partial<Document> & {
+type Tab = Partial<Document & {
     id: Types.ObjectId | string;
-    tablature_name: string;
-    tempo: string;
-    Notes: [Note];
-};
+    owner: Types.ObjectId;
+    tempo: number;
+    tab_name: string;
+    string1: [string];
+    string2: [string];
+    string3: [string];
+    string4: [string];
+    string5: [string];
+    string6: [string];
+}>
+
+type TabInput = {
+    owner: Types.ObjectId;
+    tempo: number;
+    tab_name: string;
+    string1: [string];
+    string2: [string];
+    string3: [string];
+    string4: [string];
+    string5: [string];
+    string6: [string];
+}
+
+type QueryTabByIdInput = Tab
+
+type TabOutput = {
+    id: string;
+    tempo: number;
+    tab_name: string;
+    string1: [string];
+    string2: [string];
+    string3: [string];
+    string4: [string];
+    string5: [string];
+    string6: [string];
+}
 
 export {
     User,
@@ -42,5 +68,8 @@ export {
     LoginUser,
     TokenContent,
     LoginInput,
-    QueryByIdInput
+    QueryByIdInput,
+    Tab,
+    QueryTabByIdInput,
+    TabInput,
 };
