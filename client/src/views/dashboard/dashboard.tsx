@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import SideNav from "../components/sidenav/sidenav";
+import SideNav from "../../components/sidenav/sidenav";
 import './dashboard.css'
-import ButtonCreateNew from "../components/buttonCreateNew/buttonCreateNew";
+import ButtonCreateNew from "../../components/buttonCreateNew/buttonCreateNew";
 
 function DashBoard() {
     return(

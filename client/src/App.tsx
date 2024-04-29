@@ -1,14 +1,14 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import {ApolloProvider} from "@apollo/client";
-import client from "./graphql/apolloClient";
+import client from "./views/graphql/apolloClient";
 import './App.css';
 import './styles/styles.css'
-import DashBoard from "./dashboard/dashboard";
-import Login from "./login/login";
-import Home from "./Home/home";
-import Register from "./register/register";
-import TabCreator from "./tabCreator/tabCreator";
+import DashBoard from "./views/dashboard/dashboard";
+import Login from "./views/login/login";
+import Home from "./views/Home/home";
+import Register from "./views/register/register";
+import TabCreator from "./views/tabCreator/tabCreator";
 
 
 function App() {
