@@ -12,6 +12,7 @@ const CREATE_TAB = gql`
             string4
             string5
             string6
+            owner
         }
     }
 `;

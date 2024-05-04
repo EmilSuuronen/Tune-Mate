@@ -9,11 +9,12 @@ function TopAppBar(noteState: any) {
         name: '',
         tempo: 120,
         string1: noteState.noteState.strings[1],
-        string2:  noteState.noteState.strings[2],
+        string2: noteState.noteState.strings[2],
         string3: noteState.noteState.strings[3],
         string4: noteState.noteState.strings[4],
         string5: noteState.noteState.strings[5],
         string6: noteState.noteState.strings[6],
+        owner: localStorage.getItem('currentUser')
     });
 
     const [createTab, { data, loading, error }] = useMutation(CREATE_TAB);
@@ -38,9 +39,10 @@ function TopAppBar(noteState: any) {
             string4: noteState.noteState.strings[4],
             string5: noteState.noteState.strings[5],
             string6: noteState.noteState.strings[6],
+            owner: localStorage.getItem('currentUser') || ''
         })
 
-        console.log(formData)
+        console.log("loggedinas ID From topAppBar: ", localStorage.getItem('currentUser'));
         try {
             await createTab({ variables: { input: formData} });
         } catch (err) {

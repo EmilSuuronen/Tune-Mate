@@ -25,8 +25,9 @@ function Login() {
         try {
             await loginUser({ variables: { input: formData } });
             localStorage.setItem('token', data.loginUser.token);
-            localStorage.setItem('currentUser', JSON.stringify(data.loginUser.user))
+            localStorage.setItem('currentUser', data.loginUser.user.id);
             console.log("token: ", data.loginUser.token);
+            console.log("Currently logged in as: ", localStorage.getItem('currentUser'));
             console.log("Currently logged in as: ", localStorage.getItem('currentUser'));
             navigate('/dashboard');
         } catch (err) {

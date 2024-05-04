@@ -2,6 +2,7 @@ import tabModel from "../models/tabModel";
 import {QueryByIdInput, Tab} from "../../types/typeDefs";
 import {GraphQLError} from "graphql";
 import {QueryTabByIdInput, TabInput} from '../../types/typeDefs';
+import mongoose from "mongoose";
 
 export default {
     Query: {
@@ -24,6 +25,7 @@ export default {
                     string4: args.input.string4,
                     string5: args.input.string5,
                     string6: args.input.string6,
+                    owner: args.input.owner,
                 }
             );
         },

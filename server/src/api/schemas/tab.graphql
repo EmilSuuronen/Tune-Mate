@@ -8,6 +8,7 @@ type Tab {
     string4: [String]!
     string5: [String]!
     string6: [String]!
+    owner: ID!
 }
 
 input TabInput {
@@ -19,6 +20,7 @@ input TabInput {
     string4: [String]!
     string5: [String]!
     string6: [String]!
+    owner: ID!
 }
 
 type Query {

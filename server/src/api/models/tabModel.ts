@@ -34,6 +34,10 @@ const TabModel = new mongoose.Schema<Tab>({
         type: [String],
         required: true,
     },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    }
 });
 
 const NoteModel = mongoose.model("Tab", TabModel);
