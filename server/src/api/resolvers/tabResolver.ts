@@ -1,14 +1,19 @@
 import tabModel from "../models/tabModel";
 import {QueryByIdInput, Tab} from "../../types/typeDefs";
-import {GraphQLError} from "graphql";
-import {QueryTabByIdInput, TabInput} from '../../types/typeDefs';
-import mongoose from "mongoose";
+import {TabByOwnerInput, TabInput} from '../../types/typeDefs';
 
 export default {
     Query: {
         tabs: async () => {
             return tabModel.find();
         },
+        findTabsByOwner: async (_parent: undefined, args: {input: TabByOwnerInput}) => {
+            const tabs = tabModel.find({owner: args.input.owner});
+            if (!tabs) {
+                throw new Error('No tabs found yet!');
+            }
+            return tabs;
+        }
     },
     Mutation: {
         createTab: async (

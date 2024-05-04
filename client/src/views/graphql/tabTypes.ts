@@ -17,4 +17,12 @@ const CREATE_TAB = gql`
     }
 `;
 
-export { CREATE_TAB };
+const FIND_TAB_BY_USER = gql`
+    query FindTabsByOwner($input: FindTabsByOwnerInput!) {
+        findTabsByOwner(input: $input) {
+            id
+        }
+    }
+`;
+
+export { CREATE_TAB, FIND_TAB_BY_USER };

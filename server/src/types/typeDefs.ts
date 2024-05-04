@@ -47,8 +47,6 @@ type TabInput = {
     string6: [string];
 }
 
-type QueryTabByIdInput = Tab
-
 type TabOutput = {
     id: string;
     tempo: number;
@@ -61,6 +59,15 @@ type TabOutput = {
     string6: [string];
 }
 
+type TabByOwnerInput = {
+    owner: Types.ObjectId;
+}
+
+type TabByOwnerOutput = {
+    owner: Types.ObjectId;
+}
+
+
 export {
     User,
     UserOutput,
@@ -70,6 +77,6 @@ export {
     LoginInput,
     QueryByIdInput,
     Tab,
-    QueryTabByIdInput,
+    TabByOwnerInput,
     TabInput,
 };

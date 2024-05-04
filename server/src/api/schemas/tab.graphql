@@ -23,8 +23,13 @@ input TabInput {
     owner: ID!
 }
 
+input FindTabsByOwnerInput {
+    input: ID!
+}
+
 type Query {
     tabs: [Tab],
+    findTabsByOwner(input: ID!): [Tab],
 }
 
 type Mutation {

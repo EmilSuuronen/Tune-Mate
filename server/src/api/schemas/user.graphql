@@ -30,3 +30,4 @@ type Mutation {
   createUser(input: UserInput!): User
   loginUser(input: LoginInput!): LoginResponse
 }
+

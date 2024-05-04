@@ -10,7 +10,6 @@ import Home from "./views/Home/home";
 import Register from "./views/register/register";
 import TabCreator from "./views/tabCreator/tabCreator";
 
-
 function App() {
   return (
       <div className="App">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {CREATE_USER, LOGIN_USER} from "../graphql/userTypes";
+import {LOGIN_USER} from "../graphql/userTypes";
 import {useMutation} from "@apollo/client";
 import { useNavigate } from 'react-router-dom';
 
@@ -26,9 +26,6 @@ function Login() {
             await loginUser({ variables: { input: formData } });
             localStorage.setItem('token', data.loginUser.token);
             localStorage.setItem('currentUser', data.loginUser.user.id);
-            console.log("token: ", data.loginUser.token);
-            console.log("Currently logged in as: ", localStorage.getItem('currentUser'));
-            console.log("Currently logged in as: ", localStorage.getItem('currentUser'));
             navigate('/dashboard');
         } catch (err) {
             console.error('error logging in', err);
