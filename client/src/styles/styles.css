@@ -5,6 +5,7 @@
     color: white;
     border-radius: 24px;
     border: none;
+    margin: 12px;
 }
 
 .button-border {
@@ -13,6 +14,7 @@
     color: #008cff;
     border-radius: 24px;
     border: 2px solid #008cff;
+    margin: 12px;
 }
 
 .button-color:hover {

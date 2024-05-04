@@ -3,6 +3,7 @@ import Tablature from "./Tablature";
 import './tabCreator.css';
 import SideNav from "../../components/sidenav/sidenav";
 import TopAppBar from "../../components/topAppBar/topAppBar";
+import jsPDF from "jspdf";
 
 const TabCreator: React.FC = () => {
     const [noteState, setNoteState] = useState(new Tablature());
@@ -10,6 +11,7 @@ const TabCreator: React.FC = () => {
 
     useEffect(() => {
         setTablatureDisplay(noteState.toString())
+        console.log("tabCreator user ID:" + localStorage.getItem("currentUser"));
     }, [])
 
     const handleNoteChange = (string: number, position: number, value: string) => {
@@ -28,6 +30,13 @@ const TabCreator: React.FC = () => {
     };
 
     const stringNames = ["E", "A", "D", "G", "B", "e"];
+
+    function downloadPdfFile(tablatureDisplay: string) {
+        const doc = new jsPDF();
+        doc.setFontSize(10);
+        doc.text(tablatureDisplay, 10, 10); // Adjust x, y coordinates as needed
+        doc.save('tablature.pdf');
+    }
 
     const renderStringFields = (string: number) => {
         return (
@@ -56,6 +65,7 @@ const TabCreator: React.FC = () => {
             {Array.from({length: 6}, (_, i) => renderStringFields(i + 1))}
             <div className="tablature-display">
                 <pre>{tablatureDisplay}</pre>
+                <button className="button-color" onClick={() => downloadPdfFile(tablatureDisplay)}>Download PDF</button>
             </div>
         </div>
     );
