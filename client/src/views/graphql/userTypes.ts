@@ -22,6 +22,4 @@ const LOGIN_USER = gql`
     }
 `;
 
-console.log (LOGIN_USER);
-
 export { CREATE_USER, LOGIN_USER };

@@ -15,7 +15,6 @@ const TabCreator: React.FC = () => {
     const handleNoteChange = (string: number, position: number, value: string) => {
         noteState.setNote(string, position, value);
 
-        // Create a new instance of Note, retaining the current noteState.
         const newNoteState = new Tablature();
 
         // Copy all existing notes into the new instance.

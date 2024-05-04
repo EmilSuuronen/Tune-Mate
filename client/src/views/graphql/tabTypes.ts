@@ -4,7 +4,7 @@ const CREATE_TAB = gql`
     mutation CreateTab($input: TabInput!) {
         createTab(input: $input) {
             id
-            tab_name
+            name
             tempo
             string1
             string2

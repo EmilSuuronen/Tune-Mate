@@ -7,7 +7,13 @@ function TopAppBar(noteState: any) {
 
     const [formData, setFormData] = useState({
         name: '',
-        tempo: '',
+        tempo: 120,
+        string1: noteState.noteState.strings[1],
+        string2:  noteState.noteState.strings[2],
+        string3: noteState.noteState.strings[3],
+        string4: noteState.noteState.strings[4],
+        string5: noteState.noteState.strings[5],
+        string6: noteState.noteState.strings[6],
     });
 
     const [createTab, { data, loading, error }] = useMutation(CREATE_TAB);
@@ -24,16 +30,22 @@ function TopAppBar(noteState: any) {
 
     const handleOnSaveClick = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const string1 = noteState.noteState.strings[1]
-        const string2 = noteState.noteState.strings[2]
-        const string3 = noteState.noteState.strings[3]
-        const string4 = noteState.noteState.strings[4]
-        const string5 = noteState.noteState.strings[5]
-        const string6 = noteState.noteState.strings[6]
+        setFormData({
+            ...formData,
+            string1: noteState.noteState.strings[1],
+            string2: noteState.noteState.strings[2],
+            string3: noteState.noteState.strings[3],
+            string4: noteState.noteState.strings[4],
+            string5: noteState.noteState.strings[5],
+            string6: noteState.noteState.strings[6],
+        })
+
+        console.log(formData)
         try {
-            await createTab({ variables: { input: formData, string1, string2, string3, string4, string5, string6} });
+            await createTab({ variables: { input: formData} });
         } catch (err) {
-            console.error('Error creating user:', err);
+            console.error('Error creating Tablature:', err);
+            console.log()
         }
     };
 
@@ -43,7 +55,7 @@ function TopAppBar(noteState: any) {
             <form onSubmit={handleOnSaveClick}>
                 <input name="name" value={formData.name} onChange={handleChange} className='input-project-name'
                        placeholder="name"/>
-                <input name="tempo" value={formData.tempo} onChange={handleChange} className='input-project-tempo'
+                <input name="tempo" type="number" value={formData.tempo} onChange={handleChange} className='input-project-tempo'
                        placeholder="tempo"/>
                 <button className="button-color" type="submit">Save</button>
             </form>
