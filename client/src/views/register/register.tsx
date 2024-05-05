@@ -24,7 +24,7 @@ const Register = () => {
         e.preventDefault();
         try {
             await createUser({ variables: { input: formData} });
-            navigate('/home');
+            navigate('/');
         } catch (err) {
             console.error('Error creating user:', err);
         }

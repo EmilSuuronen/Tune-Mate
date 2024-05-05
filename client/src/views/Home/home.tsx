@@ -11,35 +11,34 @@ const Home = () => {
     function navigateToLogin() {
         navigate('/login')
     }
+
     function navigateToDashBoard() {
         navigate('/dashboard')
     }
 
     const navigate = useNavigate()
     return (
-        <div>
-            <div className="div-home-container">
-                <div className="div-home-main-container">
-                    <h1 id="h1-home">Welcome to TuneMate</h1>
-                    <p>Get started with all your guitar needs by registering</p>
-                    <div className="div-translucent-container" id="div-translucent-container-horizontal">
-                        <div className="div-translucent-container" id="div-login-buttons">
-                            <p>Create an account</p>
-                            <button onClick={navigateToRegister} className="button-color" >
-                                Register
-                            </button>
-                            <p>Already an user?</p>
-                            <button onClick={navigateToLogin} className="button-border">
-                                Log in
-                            </button>
-                        </div>
-                        <div className="div-translucent-container" id="div-no-account">
-                            <p> Test features without account</p>
-                            <button onClick={navigateToDashBoard} className="button-color">
-                                Get started without an account
-                            </button>
-                        </div>
+        <div className="div-main-landing-page">
+            <div className="div-main-container-get-started">
+                <div className="div-landing-page-details">
+                    <div className="div-title">Welcome to TuneMate</div>
+                    <div className="text-description-landing-page">
+                        Place for all your guitar needs - create your own guitar tabs, chords and tunings all in one place
+                        Get started <b>by creating an account or logging in.</b>
                     </div>
+
+                    <div className="div-login-buttons">
+                        <button className="button-color" onClick={navigateToRegister}>Register</button>
+                        <button className="button-border" onClick={navigateToLogin}>Log In</button>
+                    </div>
+                </div>
+
+                <div className="div-landing-page-details-image">
+                    <div className="text-features-title">Test without account</div>
+                    <div className="text-description-landing-page">
+                        Saving and editing features are disabled for unregistered users.
+                    </div>
+                    <button className="button-border" onClick={navigateToLogin}>Go</button>
                 </div>
             </div>
         </div>
