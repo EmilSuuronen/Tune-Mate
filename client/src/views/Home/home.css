@@ -42,7 +42,6 @@
     align-items: center;
     justify-content: center;
     height: 50%;
-    width: 50%;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     padding: 40px;
@@ -56,6 +55,19 @@
     flex-direction: column;
     align-items: start;
     width: 100%;
+    flex: 1;
+}
+
+.div-landing-page-details-login {
+    margin: 24px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
 }
 
 .div-login-buttons {
@@ -66,10 +78,15 @@
     margin: 12px;
 }
 
+.text-description-landing-page {
+    text-align: start;
+}
+
 @media only screen and (max-width: 600px) {
     .div-main-container-get-started {
         flex-direction: column;
         width: 90%;
+        height: 80%;
     }
 
     .div-landing-page-details {

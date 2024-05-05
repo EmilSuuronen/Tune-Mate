@@ -2,6 +2,7 @@ import React from 'react'
 import {useNavigate} from 'react-router-dom';
 import '../../styles/styles.css'
 import './home.css'
+import Login from "../login/login";
 
 const Home = () => {
     function navigateToRegister() {
@@ -29,16 +30,15 @@ const Home = () => {
 
                     <div className="div-login-buttons">
                         <button className="button-color" onClick={navigateToRegister}>Register</button>
-                        <button className="button-border" onClick={navigateToLogin}>Log In</button>
+                        <button className="button-border" onClick={navigateToDashBoard}>Test without account</button>
                     </div>
                 </div>
 
-                <div className="div-landing-page-details-image">
-                    <div className="text-features-title">Test without account</div>
+                <div className="div-landing-page-details-login">
+                    <div className="text-features-title">Login</div>
                     <div className="text-description-landing-page">
-                        Saving and editing features are disabled for unregistered users.
+                        <Login/>
                     </div>
-                    <button className="button-border" onClick={navigateToLogin}>Go</button>
                 </div>
             </div>
         </div>

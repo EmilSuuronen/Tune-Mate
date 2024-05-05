@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {LOGIN_USER} from "../graphql/userTypes";
 import {useMutation} from "@apollo/client";
 import {useNavigate} from 'react-router-dom';
+import "./login.css"
 
 function Login() {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ function Login() {
         password: ''
     });
 
-    const [loginUser, {data, loading, error}] = useMutation(LOGIN_USER);
+    const [loginUser, {loading, error}] = useMutation(LOGIN_USER);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
@@ -23,10 +24,10 @@ function Login() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            await loginUser({variables: {input: formData}});
-            localStorage.setItem('token', data.loginUser.token);
-            localStorage.setItem('currentUser', data.loginUser.user.id);
-            localStorage.setItem('currentUserName', data.loginUser.user.user_name);
+            const response = await loginUser({variables: {input: formData}});
+            localStorage.setItem('token', response.data.loginUser.token);
+            localStorage.setItem('currentUser', response.data.loginUser.user.id);
+            localStorage.setItem('currentUserName', response.data.loginUser.user.user_name);
             console.log(localStorage.getItem('currentUserName'), "logged in as: ", localStorage.getItem('currentUser'));
             navigate('/dashboard');
         } catch (err) {
@@ -34,19 +35,17 @@ function Login() {
         }
     };
 
+    if (loading) return <p>Loading...</p>;
+
     return (
-        <div className="div-form-content-centered">
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Username:</label>
-                    <input type="text" name="user_name" value={formData.user_name} onChange={handleChange} required
-                           className='input-rounded'/>
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input type="password" name="password" value={formData.password} onChange={handleChange} required
-                           className='input-rounded'/>
-                </div>
+        <div className="login-main-container">
+            <form onSubmit={handleSubmit} className="login-main-container">
+                <label className="login-label">Username</label>
+                <input type="text" name="user_name" value={formData.user_name} onChange={handleChange} required
+                       className='input-rounded'/>
+                <label className="login-label">Password</label>
+                <input type="password" name="password" value={formData.password} onChange={handleChange} required
+                       className='input-rounded'/>
                 <button type="submit" disabled={loading} className="button-color">Log in</button>
                 {error && <p>Error: {error.message}</p>}
             </form>

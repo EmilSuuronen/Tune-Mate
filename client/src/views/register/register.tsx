@@ -30,22 +30,21 @@ const Register = () => {
         }
     };
 
+    if (loading) return <p>Loading...</p>;
+
     return (
-        <div className="div-form-content-centered">
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Username:</label>
-                    <input type="text" name="user_name" value={formData.user_name} onChange={handleChange} required className="input-rounded"/>
-                </div>
-                <div>
-                    <label>Email:</label>
-                    <input type="email" name="email" value={formData.email} onChange={handleChange} required className="input-rounded"/>
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input type="password" name="password" value={formData.password} onChange={handleChange} required className="input-rounded"/>
-                </div>
-                <button type="submit" disabled={loading} className='button-color'>Register</button>
+        <div className="login-main-container">
+            <form onSubmit={handleSubmit} className="login-main-container">
+                <label className="login-label">Username</label>
+                <input type="text" name="user_name" value={formData.user_name} onChange={handleChange} required
+                       className='input-rounded'/>
+                <label className="login-label">Email</label>
+                <input type="text" name="email" value={formData.email} onChange={handleChange} required
+                       className='input-rounded'/>
+                <label className="login-label">Password</label>
+                <input type="password" name="password" value={formData.password} onChange={handleChange} required
+                       className='input-rounded'/>
+                <button type="submit" disabled={loading} className="button-color">Create an account</button>
                 {error && <p>Error: {error.message}</p>}
             </form>
         </div>
