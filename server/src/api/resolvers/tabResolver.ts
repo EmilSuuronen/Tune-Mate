@@ -8,7 +8,9 @@ export default {
             return tabModel.find();
         },
         findTabsByOwner: async (_parent: undefined, args: {input: TabByOwnerInput}) => {
-            const tabs = tabModel.find({owner: args.input.owner});
+            const ownerId = args.input.owner;
+            console.log("ownerId: " + JSON.stringify(ownerId));
+            const tabs = tabModel.find({ owner: ownerId });
             if (!tabs) {
                 throw new Error('No tabs found yet!');
             }

@@ -2,19 +2,19 @@ import React, {useEffect, useState} from 'react';
 import SideNav from "../../components/sidenav/sidenav";
 import './dashboard.css'
 import ButtonCreateNew from "../../components/buttonCreateNew/buttonCreateNew";
-import {useQuery} from "@apollo/client";
+import {useMutation, useQuery} from "@apollo/client";
 import {FIND_TAB_BY_USER} from "../graphql/tabTypes";
+import {LOGIN_USER} from "../graphql/userTypes";
 
 function DashBoard() {
-    const { data } = useQuery(FIND_TAB_BY_USER, {
+    const data = useQuery(FIND_TAB_BY_USER, {
         variables: { input: localStorage.getItem("currentUser") }
     });
+
     const [tabsByUser, setTabsByUser] = useState([]);
 
     useEffect(() => {
-        if (data && data.findTabsByOwner) {
-            setTabsByUser(data.findTabsByOwner);
-        }
+        console.log(data);
         console.log(tabsByUser);
     }, [data, tabsByUser]);
 
