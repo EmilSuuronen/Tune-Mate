@@ -15,7 +15,7 @@ function DashBoard() {
         console.error("No user ID found in localStorage");
     }
 
-    const {loading, error, data} = useQuery(FIND_TAB_BY_USER, {
+    const {loading, data} = useQuery(FIND_TAB_BY_USER, {
         variables: {input: {input: userId}}
     });
 
@@ -26,15 +26,12 @@ function DashBoard() {
     }, [data, tabsByUser]);
 
     if (loading) return <p>Loading...</p>;
-    if (error) {
-        console.error("GraphQL Error:", error.message);
-        return <p>Error loading data!</p>;
-    }
+
     return (
         <div className="div-dashboard-flex">
             <SideNav/>
             <div className="div-dashboard-flex-vertical">
-                <h1>Welcome to TuneMate, User</h1>
+                <h1>Welcome to TuneMate{", " + localStorage.getItem("currentUserName")}</h1>
                 <h2>Tabs</h2>
                 <div className="div-tab-cards-horizontal">
                     <ButtonCreateNew/>
