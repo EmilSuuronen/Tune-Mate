@@ -30,8 +30,10 @@ input FindTabsByOwnerInput {
 type Query {
     tabs: [Tab],
     findTabsByOwner(input: FindTabsByOwnerInput): [Tab],
+    findTabById(input: ID!): Tab
 }
 
 type Mutation {
     createTab(input: TabInput!): Tab
+    modifyTab(id: ID!, input: TabInput!): Tab
 }

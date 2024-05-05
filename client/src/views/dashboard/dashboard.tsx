@@ -20,7 +20,7 @@ function DashBoard() {
     });
 
     useEffect(() => {
-        if (data && data.findTabsByOwner) { // Assuming 'findTabsByOwner' is the correct data structure
+        if (data && data.findTabsByOwner) {
             setTabsByUser(data.findTabsByOwner);
         }
     }, [data, tabsByUser]);

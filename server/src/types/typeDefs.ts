@@ -63,6 +63,10 @@ type TabByOwnerInput = {
     input: Types.ObjectId | string;
 }
 
+type TabByIdInput = {
+    input: Types.ObjectId | string;
+}
+
 type TabByOwnerOutput = {
     owner: Types.ObjectId;
 }
@@ -79,4 +83,5 @@ export {
     Tab,
     TabByOwnerInput,
     TabInput,
+    TabByIdInput
 };
