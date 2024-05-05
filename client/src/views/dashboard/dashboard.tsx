@@ -7,17 +7,29 @@ import {FIND_TAB_BY_USER} from "../graphql/tabTypes";
 import {LOGIN_USER} from "../graphql/userTypes";
 
 function DashBoard() {
-    const data = useQuery(FIND_TAB_BY_USER, {
-        variables: { input: localStorage.getItem("currentUser") }
-    });
-
+    const userId = localStorage.getItem("currentUser");
     const [tabsByUser, setTabsByUser] = useState([]);
 
+    if (!userId) {
+        console.error("No user ID found in localStorage");
+    }
+
+    const { loading, error, data } = useQuery(FIND_TAB_BY_USER, {
+        variables: { input: { input: userId } }
+    });
+
     useEffect(() => {
-        console.log(data);
-        console.log(tabsByUser);
+        if (data && data.findTabsByOwner) { // Assuming 'findTabsByOwner' is the correct data structure
+            setTabsByUser(data.findTabsByOwner);
+            console.log("tabs:", data.findTabsByOwner);
+        }
     }, [data, tabsByUser]);
 
+    if (loading) return <p>Loading...</p>;
+    if (error) {
+        console.error("GraphQL Error:", error.message);
+        return <p>Error loading data!</p>;
+    }
     return (
         <div>
             <div className="div-dashboard-flex">

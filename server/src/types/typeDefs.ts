@@ -36,7 +36,7 @@ type Tab = Partial<Document & {
 }>
 
 type TabInput = {
-    owner: Types.ObjectId;
+    owner: Types.ObjectId | string;
     tempo: number;
     name: string;
     string1: [string];
@@ -60,7 +60,7 @@ type TabOutput = {
 }
 
 type TabByOwnerInput = {
-    owner: Types.ObjectId;
+    input: Types.ObjectId | string;
 }
 
 type TabByOwnerOutput = {

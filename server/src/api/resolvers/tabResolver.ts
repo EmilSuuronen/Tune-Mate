@@ -1,6 +1,7 @@
 import tabModel from "../models/tabModel";
-import {QueryByIdInput, Tab} from "../../types/typeDefs";
+import {Tab} from "../../types/typeDefs";
 import {TabByOwnerInput, TabInput} from '../../types/typeDefs';
+const ObjectId = require('mongoose').Types.ObjectId;
 
 export default {
     Query: {
@@ -8,10 +9,11 @@ export default {
             return tabModel.find();
         },
         findTabsByOwner: async (_parent: undefined, args: {input: TabByOwnerInput}) => {
-            const ownerId = args.input.owner;
+            console.log("Received args: ", JSON.stringify(args));
+            const ownerId = args.input.input;
             console.log("ownerId: " + JSON.stringify(ownerId));
-            const tabs = tabModel.find({ owner: ownerId });
-            if (!tabs) {
+            const tabs = await tabModel.find({ owner: ownerId });
+            if (!tabs.length) {
                 throw new Error('No tabs found yet!');
             }
             return tabs;
