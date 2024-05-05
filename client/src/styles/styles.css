@@ -10,10 +10,10 @@
 
 .button-border {
     padding: 12px;
-    background-color: white;
-    color: #008cff;
+    background-color: rgba(255, 255, 255, 0.18);
+    color: white;
     border-radius: 24px;
-    border: 2px solid #008cff;
+    border: 1px solid #008cff;
     margin: 12px;
 }
 
@@ -24,6 +24,7 @@
 
 .button-border:hover {
     background-color: #0075d5;
+    border: 1px solid #0075d5;
     color: white;
 }
 /* Forms */
@@ -32,14 +33,4 @@
     padding: 8px;
     margin: 4px;
     border: none;
-}
-
-.div-form-content-centered {
-    padding: 12px;
-    border-radius: 12px;
-    justify-content: center;
-    align-content: center;
-    background-color: rgba(255, 255, 255, 0.18);
-    width: 30%;
-    margin: auto;
 }

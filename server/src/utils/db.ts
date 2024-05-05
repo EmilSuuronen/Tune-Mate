@@ -4,8 +4,12 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const mongoConnect = async () => {
-  console.log("Database connection established")
-  return await mongoose.connect(process.env.MONGO_URI as string);
+  mongoose.connect(process.env.MONGO_URI as string, {
+    connectTimeoutMS: 30000, // Extend connection timeout to 30 seconds
+    socketTimeoutMS: 45000, // Extend socket timeout
+    ssl: true,
+  }).then(() => console.log('MongoDB connected successfully'))
+      .catch(err => console.error('MongoDB connection error:', err));
 };
 
 export default mongoConnect;

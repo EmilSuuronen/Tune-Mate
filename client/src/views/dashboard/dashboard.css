@@ -1,5 +1,7 @@
 .div-dashboard-flex {
     display: flex;
+    overflow: hidden;
+    height: 100vh;
 }
 
 .div-dashboard-flex-vertical {
@@ -7,4 +9,29 @@
     padding: 12px;
     width: 100%;
     text-align: start;
+}
+
+.div-tab-cards-horizontal {
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(241, 241, 241, 0.1);
+    border-radius: 12px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #838383;
+    border-radius: 12px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

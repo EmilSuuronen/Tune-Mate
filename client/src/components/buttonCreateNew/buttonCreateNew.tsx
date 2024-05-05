@@ -9,8 +9,11 @@ function ButtonCreateNew() {
         navigate('/tabCreator')
     }
 
-    return(
-        <button className="button-create-new" onClick={navigateToTabs}> + </button>
+    return (
+        <div className="div-button-create">
+            <button className="button-create-new" onClick={navigateToTabs}> +</button>
+            <p>Create New</p>
+        </div>
     );
 }
 

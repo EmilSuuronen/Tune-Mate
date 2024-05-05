@@ -1,7 +1,7 @@
 .div-tab-editor-main-container {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100vh;
 }
 
 .input-note-edit {
@@ -33,4 +33,12 @@
 
 .tablature-display {
     font-size: 19px;
+}
+
+.div-tab-cards-horizontal {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    margin: 10px;
 }

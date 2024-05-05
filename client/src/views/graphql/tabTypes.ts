@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import {gql} from '@apollo/client';
 
 const CREATE_TAB = gql`
     mutation CreateTab($input: TabInput!) {
@@ -21,8 +21,34 @@ const FIND_TAB_BY_USER = gql`
     query FindTabsByOwner($input: FindTabsByOwnerInput!) {
         findTabsByOwner(input: $input) {
             id
+            name
+            tempo
+            string1
+            string2
+            string3
+            string4
+            string5
+            string6
+            owner
         }
     }
 `;
 
-export { CREATE_TAB, FIND_TAB_BY_USER };
+const MODIFY_TAB = gql`
+    mutation ModifyTab ($id: ID!, $input: TabInput!) {
+        modifyTab(id: $id, input: $input) {
+            id
+            name
+            tempo
+            string1
+            string2
+            string3
+            string4
+            string5
+            string6
+            owner
+        }
+    }
+`;
+
+export {CREATE_TAB, FIND_TAB_BY_USER};

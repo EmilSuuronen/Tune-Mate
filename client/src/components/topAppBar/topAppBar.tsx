@@ -2,8 +2,16 @@ import React, {useState} from "react";
 import './topAppBar.css'
 import {useMutation} from "@apollo/client";
 import {CREATE_TAB} from "../../views/graphql/tabTypes";
+import Modal from "../popupModal/popupModal";
+import { useNavigate } from 'react-router-dom';
 
 function TopAppBar(noteState: any) {
+
+    const navigate = useNavigate();
+
+    const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+    const handleOpenModal = () => setModalOpen(true);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -20,13 +28,13 @@ function TopAppBar(noteState: any) {
     const [createTab] = useMutation(CREATE_TAB);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
+            const { name, value } = e.target;
 
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: value,
-        }));
-        console.log(value)
+            setFormData(prevData => ({
+                ...prevData,
+                [name]: value,
+            }));
+            console.log(value)
     };
 
     const handleOnSaveClick = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -43,24 +51,40 @@ function TopAppBar(noteState: any) {
         })
 
         console.log("loggedinas ID From topAppBar: ", localStorage.getItem('currentUser'));
+        setModalOpen(true);
+    };
+
+    const handleConfirmSave = async () => {
         try {
-            await createTab({ variables: { input: formData} });
+            await createTab({ variables: { input: formData } });
+            console.log('Tab created successfully!');
+            setModalOpen(false);
         } catch (err) {
             console.error('Error creating Tablature:', err);
-            console.log()
+            setModalOpen(false);
         }
     };
 
+    function handleNavigateToHome() {
+        navigate('/dashboard');
+    }
+
     return (
         <div className='div-top-app-bar-main'>
-            <h2 className="top-app-bar-main-text">TuneMate</h2>
+            <h2 className="top-app-bar-main-text" onClick={handleNavigateToHome}>TuneMate</h2>
             <form onSubmit={handleOnSaveClick}>
                 <input name="name" value={formData.name} onChange={handleChange} className='input-project-name'
                        placeholder="name"/>
                 <input name="tempo" type="number" value={formData.tempo} onChange={handleChange} className='input-project-tempo'
                        placeholder="tempo"/>
-                <button className="button-color" type="submit">Save</button>
+                <button className="button-color" onClick={handleOpenModal} type="submit" >Save</button>
             </form>
+            <Modal
+                isOpen={modalOpen}
+                text="Save changes?"
+                onCancel={() => setModalOpen(false)}
+                onOk={handleConfirmSave}
+            />
         </div>
     );
 }

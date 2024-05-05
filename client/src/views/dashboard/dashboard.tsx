@@ -2,35 +2,47 @@ import React, {useEffect, useState} from 'react';
 import SideNav from "../../components/sidenav/sidenav";
 import './dashboard.css'
 import ButtonCreateNew from "../../components/buttonCreateNew/buttonCreateNew";
-import {useQuery} from "@apollo/client";
+import {useMutation, useQuery} from "@apollo/client";
 import {FIND_TAB_BY_USER} from "../graphql/tabTypes";
+import ItemCard from "../../components/dashBoardItemCard/dashBoardItemCard";
+import Tab from "../tabCreator/TabInterface";
 
 function DashBoard() {
-    const { data } = useQuery(FIND_TAB_BY_USER, {
-        variables: { input: localStorage.getItem("currentUser") }
+    const userId = localStorage.getItem("currentUser");
+    const [tabsByUser, setTabsByUser] = useState<Tab[]>([]);
+
+    if (!userId) {
+        console.error("No user ID found in localStorage");
+    }
+
+    const {loading, data} = useQuery(FIND_TAB_BY_USER, {
+        variables: {input: {input: userId}}
     });
-    const [tabsByUser, setTabsByUser] = useState([]);
 
     useEffect(() => {
         if (data && data.findTabsByOwner) {
             setTabsByUser(data.findTabsByOwner);
         }
-        console.log(tabsByUser);
     }, [data, tabsByUser]);
 
+    if (loading) return <p>Loading...</p>;
+
     return (
-        <div>
-            <div className="div-dashboard-flex">
-                <SideNav/>
-                <div className="div-dashboard-flex-vertical">
-                    <h1>Welcome to TuneMate, User</h1>
-                    <h2>Tabs</h2>
+        <div className="div-dashboard-flex">
+            <SideNav/>
+            <div className="div-dashboard-flex-vertical">
+                <h1>Welcome to TuneMate{", " + localStorage.getItem("currentUserName")}</h1>
+                <h2>Tabs</h2>
+                <div className="div-tab-cards-horizontal">
                     <ButtonCreateNew/>
-                    <h2>Tunings</h2>
-                    <ButtonCreateNew/>
-                    <h2>Chords</h2>
-                    <ButtonCreateNew/>
+                    {tabsByUser.map((tab) => (
+                        <ItemCard key={tab.id} cardData={tab}/>
+                    ))}
                 </div>
+                <h2>Tunings</h2>
+                <ButtonCreateNew/>
+                <h2>Chords</h2>
+                <ButtonCreateNew/>
             </div>
         </div>
     );
