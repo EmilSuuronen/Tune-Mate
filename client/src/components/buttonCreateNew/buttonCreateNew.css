@@ -12,3 +12,11 @@
     background-color: #0075d5;
     color: white;
 }
+
+.div-button-create {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 12px;
+}
