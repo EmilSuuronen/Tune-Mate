@@ -17,7 +17,7 @@ function TopAppBar(noteState: any) {
         owner: localStorage.getItem('currentUser')
     });
 
-    const [createTab, { data, loading, error }] = useMutation(CREATE_TAB);
+    const [createTab] = useMutation(CREATE_TAB);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;

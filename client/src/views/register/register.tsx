@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 import { useMutation } from '@apollo/client';
 import {CREATE_USER} from "../graphql/userTypes";
 import {useNavigate} from "react-router-dom";
@@ -12,7 +11,7 @@ const Register = () => {
         password: ''
     });
 
-    const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
+    const [createUser, { loading, error }] = useMutation(CREATE_USER);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({

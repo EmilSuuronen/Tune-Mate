@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Tablature from "./Tablature";
 import './tabCreator.css';
-import SideNav from "../../components/sidenav/sidenav";
 import TopAppBar from "../../components/topAppBar/topAppBar";
 import jsPDF from "jspdf";
 
@@ -12,7 +11,7 @@ const TabCreator: React.FC = () => {
     useEffect(() => {
         setTablatureDisplay(noteState.toString())
         console.log("tabCreator user ID:" + localStorage.getItem("currentUser"));
-    }, [])
+    }, [noteState])
 
     const handleNoteChange = (string: number, position: number, value: string) => {
         noteState.setNote(string, position, value);
@@ -49,7 +48,7 @@ const TabCreator: React.FC = () => {
                         value={noteValue === "-" ? "" : noteValue}
                         placeholder="-"
                         className="input-note-edit"
-                        id={position % 4 == 0 ? "input-background-bar" : undefined}
+                        id={position % 4 === 0 ? "input-background-bar" : undefined}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleNoteChange(string, position, e.target.value)}
                         maxLength={2}
                     />
