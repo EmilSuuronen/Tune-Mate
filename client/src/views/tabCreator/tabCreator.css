@@ -34,3 +34,11 @@
 .tablature-display {
     font-size: 19px;
 }
+
+.div-tab-cards-horizontal {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    margin: 10px;
+}
