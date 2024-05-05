@@ -11,15 +11,16 @@ export default {
         findTabsByOwner: async (_parent: undefined, args: {input: TabByOwnerInput}) => {
             console.log("Received args: ", JSON.stringify(args));
             const ownerId = args.input.input;
-            console.log("ownerId: " + JSON.stringify(ownerId));
             const tabs = await tabModel.find({ owner: ownerId });
+            console.log("Found tabs: ", JSON.stringify(tabs));
             if (!tabs.length) {
                 throw new Error('No tabs found yet!');
             }
             return tabs;
         },
         findTabById: async (_parent: undefined, args: {input: TabByIdInput}) => {
-            const tab = await tabModel.find({ id: args.input });
+            console.log("Received args: ", JSON.stringify(args));
+            const tab = await tabModel.findById(args.input.input);
             if (!tab) {
                 throw new Error('No tabs found yet!');
             }

@@ -1,14 +1,14 @@
 type Tab {
-    id: ID!
-    name: String!
-    tempo: Int!
-    string1: [String]!
-    string2: [String]!
-    string3: [String]!
-    string4: [String]!
-    string5: [String]!
-    string6: [String]!
-    owner: ID!
+    id: ID
+    name: String
+    tempo: Int
+    string1: [String]
+    string2: [String]
+    string3: [String]
+    string4: [String]
+    string5: [String]
+    string6: [String]
+    owner: ID
 }
 
 input TabInput {
@@ -27,10 +27,14 @@ input FindTabsByOwnerInput {
     input: ID!
 }
 
+input FindTabsByIdInput {
+    input: ID!
+}
+
 type Query {
     tabs: [Tab],
     findTabsByOwner(input: FindTabsByOwnerInput): [Tab],
-    findTabById(input: ID!): Tab
+    findTabById(input: FindTabsByIdInput): Tab
 }
 
 type Mutation {
