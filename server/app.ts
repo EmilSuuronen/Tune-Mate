@@ -1,13 +1,13 @@
 import express from 'express';
-import {ApolloServer} from '@apollo/server';
 import dotenv from 'dotenv';
-import {expressMiddleware} from '@apollo/server/express4';
 import cors from 'cors';
 import typeDefs from "./src/api/schemas";
 import resolvers from "./src/api/resolvers";
 import mongoConnect from "./src/utils/db";
 import {MyContext} from "./src/types/MyContext";
 import helmet from 'helmet';
+import {expressMiddleware} from "@apollo/server/express4";
+import {ApolloServer} from '@apollo/server';
 
 dotenv.config();
 const path = require('path');
