@@ -1,0 +1,45 @@
+/* Buttons */
+.button-color {
+    padding: 12px;
+    background-color: #008cff;
+    color: white;
+    border-radius: 24px;
+    border: none;
+    margin: 12px;
+}
+
+.button-border {
+    padding: 12px;
+    background-color: white;
+    color: #008cff;
+    border-radius: 24px;
+    border: 2px solid #008cff;
+    margin: 12px;
+}
+
+.button-color:hover {
+    background-color: #0075d5;
+    color: white;
+}
+
+.button-border:hover {
+    background-color: #0075d5;
+    color: white;
+}
+/* Forms */
+.input-rounded {
+    border-radius: 24px;
+    padding: 8px;
+    margin: 4px;
+    border: none;
+}
+
+.div-form-content-centered {
+    padding: 12px;
+    border-radius: 12px;
+    justify-content: center;
+    align-content: center;
+    background-color: rgba(255, 255, 255, 0.18);
+    width: 30%;
+    margin: auto;
+}

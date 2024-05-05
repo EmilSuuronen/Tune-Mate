@@ -1,25 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {ApolloProvider} from "@apollo/client";
+import client from "./views/graphql/apolloClient";
 import './App.css';
+import './styles/styles.css'
+import DashBoard from "./views/dashboard/dashboard";
+import Login from "./views/login/login";
+import Home from "./views/Home/home";
+import Register from "./views/register/register";
+import TabCreator from "./views/tabCreator/tabCreator";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+          <ApolloProvider client={client}>
+              <BrowserRouter>
+                  <Routes>
+                      <Route path="/register" element={<Register/>}/>
+                      <Route path="/login" element={<Login/>}/>
+                      <Route path="/" element={<Home/>}/>
+                      <Route path="/dashboard" element={<DashBoard/>}/>
+                      <Route path="/tabCreator" element={<TabCreator/>}/>
+                  </Routes>
+              </BrowserRouter>
+          </ApolloProvider>
+      </div>
   );
 }
 

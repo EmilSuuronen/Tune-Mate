@@ -8,8 +8,9 @@
       "forceConsistentCasingInFileNames": true,
       "noImplicitAny": true,
       "strict": true,
-      "skipLibCheck": true
+      "skipLibCheck": true,
+      "moduleResolution": "node"
   },
-  "include": ["./*.js", "*.ts"],
+  "include": ["./**/*", "./*.js", "*.ts"],
   "allowSyntheticDefaultImports": true
 }

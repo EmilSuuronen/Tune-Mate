@@ -1,0 +1,36 @@
+.div-tab-editor-main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.input-note-edit {
+    height: 15px;
+    width: 15px;
+    border: none;
+    border-radius: 0px;
+    background-color: #77B9F6;
+    margin: 2px;
+    text-align: center;
+    color: white;
+}
+
+.div-editor-container-string {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.h4-string-name {
+    margin: 0;
+    padding: 4px;
+}
+
+#input-background-bar {
+    background-color: #3498f3;
+}
+
+.tablature-display {
+    font-size: 19px;
+}

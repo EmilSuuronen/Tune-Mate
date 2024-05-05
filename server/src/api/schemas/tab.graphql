@@ -1,0 +1,37 @@
+type Tab {
+    id: ID!
+    name: String!
+    tempo: Int!
+    string1: [String]!
+    string2: [String]!
+    string3: [String]!
+    string4: [String]!
+    string5: [String]!
+    string6: [String]!
+    owner: ID!
+}
+
+input TabInput {
+    name: String!
+    tempo: Int!
+    string1: [String]!
+    string2: [String]!
+    string3: [String]!
+    string4: [String]!
+    string5: [String]!
+    string6: [String]!
+    owner: ID!
+}
+
+input FindTabsByOwnerInput {
+    input: ID!
+}
+
+type Query {
+    tabs: [Tab],
+    findTabsByOwner(input: ID!): [Tab],
+}
+
+type Mutation {
+    createTab(input: TabInput!): Tab
+}

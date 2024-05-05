@@ -1,0 +1,10 @@
+.div-dashboard-flex {
+    display: flex;
+}
+
+.div-dashboard-flex-vertical {
+    flex-direction: column;
+    padding: 12px;
+    width: 100%;
+    text-align: start;
+}
