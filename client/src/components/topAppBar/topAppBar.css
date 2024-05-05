@@ -36,4 +36,5 @@
 .top-app-bar-main-text {
     margin-left: 12px;
     flex: 0;
+    cursor: pointer;
 }
