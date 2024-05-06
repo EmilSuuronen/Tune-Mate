@@ -1,13 +1,15 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './topAppBar.css'
 import {useMutation} from "@apollo/client";
-import {CREATE_TAB} from "../../views/graphql/tabTypes";
+import {CREATE_TAB, MODIFY_TAB} from "../../views/graphql/tabTypes";
 import Modal from "../popupModal/popupModal";
-import { useNavigate } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 
 function TopAppBar(noteState: any) {
 
     const navigate = useNavigate();
+
+    const tabId = useParams();
 
     const [modalOpen, setModalOpen] = useState<boolean>(false);
 
@@ -26,6 +28,7 @@ function TopAppBar(noteState: any) {
     });
 
     const [createTab] = useMutation(CREATE_TAB);
+    const [modifyTab, { data, loading, error }] = useMutation(MODIFY_TAB);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             const { name, value } = e.target;
@@ -55,13 +58,31 @@ function TopAppBar(noteState: any) {
     };
 
     const handleConfirmSave = async () => {
-        try {
-            await createTab({ variables: { input: formData } });
-            console.log('Tab created successfully!');
-            setModalOpen(false);
-        } catch (err) {
-            console.error('Error creating Tablature:', err);
-            setModalOpen(false);
+        console.log("tabID: " + tabId.id)
+        if (tabId.id) {
+            try {
+                await modifyTab({
+                    variables: {
+                        id: tabId.id,
+                        input: formData
+                    }
+                });
+                console.log('Tab modified successfully!');
+                setModalOpen(false);
+                console.log
+            } catch (err) {
+                console.error('Error modifying Tab:', err);
+                setModalOpen(false);
+            }
+        } else {
+            try {
+                await createTab({ variables: { input: formData } });
+                console.log('Tab created successfully!');
+                setModalOpen(false);
+            } catch (err) {
+                console.error('Error creating Tablature:', err);
+                setModalOpen(false);
+            }
         }
     };
 
@@ -84,6 +105,7 @@ function TopAppBar(noteState: any) {
                 text="Save changes?"
                 onCancel={() => setModalOpen(false)}
                 onOk={handleConfirmSave}
+                isLoading={loading}
             />
         </div>
     );

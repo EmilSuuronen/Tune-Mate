@@ -28,7 +28,7 @@ input FindTabsByOwnerInput {
 }
 
 input FindTabsByIdInput {
-    input: ID!
+    id: ID!
 }
 
 type Query {

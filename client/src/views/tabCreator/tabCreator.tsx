@@ -14,7 +14,7 @@ const TabCreator: React.FC = () => {
     const tabId = useParams();
 
     const { loading, error, data } = useQuery(FIND_TAB_BY_ID, {
-        variables: { input: { input: tabId.id } }
+        variables: { input: { id: tabId.id } }
     });
 
     const updateNoteStateFromGraphQL = (tabData: any) => {

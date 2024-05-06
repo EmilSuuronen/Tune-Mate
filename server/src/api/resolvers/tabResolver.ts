@@ -1,7 +1,7 @@
 import tabModel from "../models/tabModel";
 import {Tab} from "../../types/typeDefs";
 import {TabByOwnerInput, TabInput, TabByIdInput} from '../../types/typeDefs';
-const ObjectId = require('mongoose').Types.ObjectId;
+import {Types} from "mongoose";
 
 export default {
     Query: {
@@ -20,7 +20,7 @@ export default {
         },
         findTabById: async (_parent: undefined, args: {input: TabByIdInput}) => {
             console.log("Received args: ", JSON.stringify(args));
-            const tab = await tabModel.findById(args.input.input);
+            const tab = await tabModel.findById(args.input.id);
             if (!tab) {
                 throw new Error('No tabs found yet!');
             }
@@ -50,6 +50,8 @@ export default {
             _parent: undefined,
             args: { id: string, input: TabInput },
         ): Promise<Tab | null> => {
+            console.log("args.id: ",args.id)
+            console.log("args.input: ", args.input)
             const updatedTab = await tabModel.findByIdAndUpdate(
                 args.id,
                 {

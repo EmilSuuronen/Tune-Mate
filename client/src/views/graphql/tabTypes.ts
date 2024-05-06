@@ -52,8 +52,8 @@ const FIND_TAB_BY_ID = gql`
 `;
 
 const MODIFY_TAB = gql`
-    mutation ModifyTab ($input: FindTabsByIdInput!, $input: TabInput!) {
-        modifyTab(id: $input, input: $input) {
+    mutation ModifyTab ($id: ID!, $input: TabInput!) {
+        modifyTab(id: $id, input: $input) {
             id
             name
             tempo
