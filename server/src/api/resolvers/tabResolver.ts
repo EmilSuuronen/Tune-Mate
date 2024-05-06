@@ -74,5 +74,15 @@ export default {
             }
             return updatedTab;
         },
+        deleteTab: async (
+            _parent: undefined,
+            args: { id: string },
+        ): Promise<Tab | null> => {
+            const deletedTab = await tabModel.findByIdAndDelete(args.id);
+            if (!deletedTab) {
+                throw new Error("No tab found with the given ID");
+            }
+            return deletedTab;
+        }
     }
 }

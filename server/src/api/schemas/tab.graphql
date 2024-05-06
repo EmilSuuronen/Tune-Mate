@@ -40,4 +40,5 @@ type Query {
 type Mutation {
     createTab(input: TabInput!): Tab
     modifyTab(id: ID!, input: TabInput!): Tab
+    deleteTab(id: ID!): Tab
 }

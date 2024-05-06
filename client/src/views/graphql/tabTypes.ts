@@ -68,4 +68,12 @@ const MODIFY_TAB = gql`
     }
 `;
 
-export {CREATE_TAB, FIND_TAB_BY_USER,FIND_TAB_BY_ID, MODIFY_TAB};
+const DELETE_TAB = gql`
+    mutation DeleteTab($id: ID!) {
+        deleteTab(id: $id) {
+            id
+        }
+    }
+`;
+
+export {CREATE_TAB, FIND_TAB_BY_USER,FIND_TAB_BY_ID, MODIFY_TAB, DELETE_TAB};
