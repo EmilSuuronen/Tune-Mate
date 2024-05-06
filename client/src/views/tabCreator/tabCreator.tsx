@@ -3,15 +3,53 @@ import Tablature from "./Tablature";
 import './tabCreator.css';
 import TopAppBar from "../../components/topAppBar/topAppBar";
 import jsPDF from "jspdf";
+import {useParams} from "react-router-dom";
+import {useMutation, useQuery} from "@apollo/client";
+import {FIND_TAB_BY_ID} from "../graphql/tabTypes";
 
 const TabCreator: React.FC = () => {
     const [noteState, setNoteState] = useState(new Tablature());
     const [tablatureDisplay, setTablatureDisplay] = useState<string>("");
+    const [testTab, setTestTab] = useState<any>([]);
+    const tabId = useParams();
+
+    const { loading, error, data } = useQuery(FIND_TAB_BY_ID, {
+        variables: { input: { input: tabId.id } }
+    });
+
+    const updateNoteStateFromGraphQL = (tabData: any) => {
+        const newNoteState = new Tablature();
+
+        // Assuming tabData.string1 to tabData.string6 are available
+        Object.keys(tabData).forEach(key => {
+            if (key.startsWith('string') && Array.isArray(tabData[key])) {
+                const stringIndex = parseInt(key.replace('string', ''), 10); // Converts 'string1' to 1
+                tabData[key].forEach((note: string, index: number) => {
+                    if (note !== null) {
+                        newNoteState.setNote(stringIndex, index, note);
+                    }
+                });
+            }
+        });
+
+        return newNoteState;
+    };
+
+    /*useEffect(() => {
+        if (data && data.findTabById) {
+            setTestTab(JSON.stringify(testTab));
+        }
+        console.log("tab by id:" + testTab);
+        setTablatureDisplay(noteState.toString())
+    }, [noteState]) */
 
     useEffect(() => {
-        setTablatureDisplay(noteState.toString())
-        console.log("tabCreator user ID:" + localStorage.getItem("currentUser"));
-    }, [noteState])
+        if (data && data.findTabById) {
+            const updatedNoteState = updateNoteStateFromGraphQL(data.findTabById);
+            setNoteState(updatedNoteState);
+            setTablatureDisplay(updatedNoteState.toString()); // Update this method if necessary
+        }
+    }, [data]);
 
     const handleNoteChange = (string: number, position: number, value: string) => {
         noteState.setNote(string, position, value);
@@ -25,7 +63,6 @@ const TabCreator: React.FC = () => {
 
         setNoteState(newNoteState); // Set the new instance as state.
         setTablatureDisplay(noteState.toString());
-        console.log(noteState)
     };
 
     const stringNames = ["E", "A", "D", "G", "B", "e"];
@@ -56,6 +93,9 @@ const TabCreator: React.FC = () => {
             </div>
         );
     };
+
+
+    if (loading) return <p>Loading...</p>;
 
     return (
         <div className="div-tab-editor-main-container">

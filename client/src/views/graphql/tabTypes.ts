@@ -34,9 +34,9 @@ const FIND_TAB_BY_USER = gql`
     }
 `;
 
-const MODIFY_TAB = gql`
-    mutation ModifyTab ($id: ID!, $input: TabInput!) {
-        modifyTab(id: $id, input: $input) {
+const FIND_TAB_BY_ID = gql`
+    query FindTabById($input: FindTabsByIdInput!) {
+        findTabById(input: $input) {
             id
             name
             tempo
@@ -51,4 +51,21 @@ const MODIFY_TAB = gql`
     }
 `;
 
-export {CREATE_TAB, FIND_TAB_BY_USER, MODIFY_TAB};
+const MODIFY_TAB = gql`
+    mutation ModifyTab ($input: FindTabsByIdInput!, $input: TabInput!) {
+        modifyTab(id: $input, input: $input) {
+            id
+            name
+            tempo
+            string1
+            string2
+            string3
+            string4
+            string5
+            string6
+            owner
+        }
+    }
+`;
+
+export {CREATE_TAB, FIND_TAB_BY_USER,FIND_TAB_BY_ID, MODIFY_TAB};

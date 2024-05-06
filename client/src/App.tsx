@@ -20,7 +20,8 @@ function App() {
                       <Route path="/login" element={<Login/>}/>
                       <Route path="/" element={<Home/>}/>
                       <Route path="/dashboard" element={<DashBoard/>}/>
-                      <Route path="/tabCreator" element={<TabCreator/>}/>
+                      <Route path="/tabCreator" element={<TabCreator />} />
+                      <Route path="/tabCreator/:id" element={<TabCreator />} />
                   </Routes>
               </BrowserRouter>
           </ApolloProvider>
