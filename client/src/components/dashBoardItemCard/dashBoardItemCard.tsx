@@ -20,7 +20,6 @@ const ItemCard: React.FC<ItemCardProps> = ({cardData}) => {
     const [deleteTab, {data, loading}] = useMutation(DELETE_TAB);
 
     const handleDeleteTab = async () => {
-        console.log("deleting tab: ", cardData.id)
         try {
             await deleteTab({
                 variables: {id: cardData.id}

@@ -6,11 +6,11 @@ import jsPDF from "jspdf";
 import {useParams} from "react-router-dom";
 import {useMutation, useQuery} from "@apollo/client";
 import {FIND_TAB_BY_ID} from "../graphql/tabTypes";
+import SideNav from "../../components/sidenav/sidenav";
 
 const TabCreator: React.FC = () => {
     const [noteState, setNoteState] = useState(new Tablature());
     const [tablatureDisplay, setTablatureDisplay] = useState<string>("");
-    const [testTab, setTestTab] = useState<any>([]);
     const tabId = useParams();
 
     const { loading, error, data } = useQuery(FIND_TAB_BY_ID, {
@@ -20,7 +20,6 @@ const TabCreator: React.FC = () => {
     const updateNoteStateFromGraphQL = (tabData: any) => {
         const newNoteState = new Tablature();
 
-        // Assuming tabData.string1 to tabData.string6 are available
         Object.keys(tabData).forEach(key => {
             if (key.startsWith('string') && Array.isArray(tabData[key])) {
                 const stringIndex = parseInt(key.replace('string', ''), 10); // Converts 'string1' to 1
@@ -86,17 +85,19 @@ const TabCreator: React.FC = () => {
         );
     };
 
-
     if (loading) return <p>Loading...</p>;
 
     return (
-        <div className="div-tab-editor-main-container">
-            <TopAppBar noteState={noteState}/>
-            <h3>Note Editor</h3>
-            {Array.from({length: 6}, (_, i) => renderStringFields(i + 1))}
-            <div className="tablature-display">
-                <pre>{tablatureDisplay}</pre>
-                <button className="button-color" onClick={() => downloadPdfFile(tablatureDisplay)}>Download PDF</button>
+        <div className="tab-editor-full-container">
+            <SideNav/>
+            <div className="div-tab-editor-main-container">
+                <TopAppBar noteState={noteState}/>
+                <h3>Note Editor</h3>
+                {Array.from({length: 6}, (_, i) => renderStringFields(i + 1))}
+                <div className="tablature-display">
+                    <pre>{tablatureDisplay}</pre>
+                    <button className="button-color" onClick={() => downloadPdfFile(tablatureDisplay)}>Download PDF</button>
+                </div>
             </div>
         </div>
     );

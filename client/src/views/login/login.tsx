@@ -47,7 +47,7 @@ function Login() {
                 <input type="password" name="password" value={formData.password} onChange={handleChange} required
                        className='input-rounded'/>
                 <button type="submit" disabled={loading} className="button-color">Log in</button>
-                {error && <p>Error: {error.message}</p>}
+                {error && <p>{error.message}</p>}
             </form>
         </div>
     );

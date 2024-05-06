@@ -1,6 +1,5 @@
 .div-top-app-bar-main {
     display: flex;
-    height: 50px;
     width: 100%;
     min-width: 5%;
     top: 0;
@@ -11,30 +10,41 @@
 
 .input-project-name {
     height: 30px;
-    padding: 0px;
+    width: 40%;
+    min-width: 150px;
     border-radius: 120px;
     border: 0;
     color: black;
     text-align: center;
-    flex: 2;
-    margin-left: 100px;
-    margin-right: 100px;
 }
 
 .input-project-tempo {
     height: 30px;
-    padding: 0px;
     border-radius: 120px;
+    width: 10%;
+    min-width: 50px;
     border: 0;
     color: black;
     text-align: center;
-    flex: 0.5;
-    margin-left: 100px;
-    margin-right: 100px;
 }
 
-.top-app-bar-main-text {
-    margin-left: 12px;
-    flex: 0;
-    cursor: pointer;
+.top-app-bar-form {
+    display: flex;
+    flex: 1;
+    justify-content: start;
+    align-items: center;
+}
+
+.top-app-bar-name {
+    display: flex;
+    flex: 1;
+    justify-content: start;
+    align-items: start;
+}
+
+.top-app-bar-functions {
+    display: flex;
+    flex: 1;
+    justify-content: end;
+    align-items: center;
 }
