@@ -1,27 +1,18 @@
 .div-nav-main {
     display: flex;
     flex-direction: column;
-    height: 100%;
     width: 50px;
-    min-width: 40px;
-    left: 0;
-    top: 0;
     background-color: #3a3a3a;
     box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.75);
     align-content: center;
     transition:width 0.3s;
     justify-content: center;
     align-items: center;
-    padding: 12px;
-    z-index: 100;
+    top: 0;
 }
 
 .div-nav-main:hover{
     width: 60px;
-}
-
-.div-nav-main:hover .sidenav-icon-text{
-    font-size: 14px;
 }
 
 .sidenav-icon-text {
@@ -31,29 +22,39 @@
 }
 
 .sidenav-icon-container {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 12px;
-    align-items: end;
     cursor: pointer;
 }
 
-.div-nav-main:hover .sidebar-icon{
-    font-size: 28px;
+.sidebar-icon-container {
+    text-align: center;
+    cursor: pointer;
 }
 
 .sidebar-icon {
     font-size: 24px;
-    transition: font-size 0.3s
 }
 
 #home-icon-div {
-    flex: 0.1;
+    top: 20px;
+    position: fixed;
 }
 
 #user-icon-div {
-    flex: 0.1;
+    top: 80px;
+    position: fixed;
+}
+
+#logout-icon-div {
+    bottom: 20px;
+    position: fixed;
 }
 
 #logout-icon-div {
     flex: 100;
+    justify-content: end;
+    align-items: end;
 }

@@ -1,35 +1,71 @@
 .div-item-card-main {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    border-radius: 10px;
-    background-color: #545454;
-    box-shadow: 0px 0px 10px 0px #000000;
-    border: 0;
-    transition: background-color 0.3s;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px solid #f1f1f1;
 }
 
 .div-item-card-main:hover {
-    background-color: #696969;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-.item-card-header {
+.div-item-card-element{
+    flex: 1;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    border-radius: 10px 10px 0 0;
-    background-color: #2f313f;
     padding: 12px;
-    width: 240px;
 }
 
-.item-card-content {
+#tempo.div-item-card-element{
+    flex: 0.1;
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
+    padding: 12px;
+}
+
+#delete.div-item-card-element{
+    flex: 0.1;
+    display: flex;
+    padding: 12px;
+    color: #ff3333;
+}
+
+#delete.div-item-card-element:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.item-card-name {
+    color: #008cff;
+    padding: 0;
+    margin: 0;
+}
+
+.item-card-name:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+#titles.div-item-card-main:hover{
+    background-color: rgba(255, 0, 0, 0);
+    text-decoration: none;
+}
+
+#titles.div-item-card-main{
+    border: none;
+}
+
+#titles.div-item-card-element{
+    border: none
+}
+
+#titles.item-card-name {
+    color: #ffffff;
+    padding: 0;
+    margin: 0;
+}
+
+#titles.item-card-name:hover {
+    text-decoration: none;
+    cursor: default;
 }

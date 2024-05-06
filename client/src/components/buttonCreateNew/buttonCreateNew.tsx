@@ -11,7 +11,7 @@ function ButtonCreateNew() {
 
     return (
         <div className="div-button-create">
-            <button className="button-create-new" onClick={navigateToTabs}> +</button>
+            <button className="button-create-new" onClick={navigateToTabs}>+</button>
             <p>Create New</p>
         </div>
     );

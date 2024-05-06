@@ -1,7 +1,7 @@
 import React from 'react';
 import Tab from "../../views/tabCreator/TabInterface";
 import './dashBoardItemCard.css';
-import { FaItunesNote } from "react-icons/fa";
+import {FaItunesNote} from "react-icons/fa";
 import {useNavigate} from "react-router-dom";
 import {useMutation} from "@apollo/client";
 import {DELETE_TAB} from "../../views/graphql/tabTypes";
@@ -31,16 +31,16 @@ const ItemCard: React.FC<ItemCardProps> = ({cardData}) => {
     }
 
     return (
-        <div className="div-item-card-main" >
-            <div className="item-card-header">
-                {cardData.name}
-                <p>bpm {cardData.tempo} <FaItunesNote /></p>
+        <div className="div-item-card-main">
+            <div className="div-item-card-element">
+                <p className="item-card-name" id="name" onClick={handleNavigateToTab}>{cardData.name}</p>
             </div>
-            <div className="item-card-content" onClick={handleNavigateToTab}>
-                <p>Delete</p>
-                <p>Edited: </p>
+            <div className="div-item-card-element" id="tempo">
+                {cardData.tempo} bpm
             </div>
-            <button onClick={handleDeleteTab}> delete </button>
+            <div className="div-item-card-element" id="delete" onClick={handleDeleteTab}>
+                Delete
+            </div>
         </div>
     );
 }

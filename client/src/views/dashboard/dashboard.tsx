@@ -35,9 +35,22 @@ function DashBoard() {
                 <h2>Tabs</h2>
                 <div className="div-tab-cards-horizontal">
                     <ButtonCreateNew/>
-                    {tabsByUser.map((tab) => (
-                        <ItemCard key={tab.id} cardData={tab}/>
-                    ))}
+                    <div className="div-tab-cards-vertical">
+                        <div className="div-item-card-main" id="titles">
+                            <div className="div-item-card-element" id="name">
+                                <b className="item-card-name" id="titles">Name</b>
+                            </div>
+                            <div className="div-item-card-element" id="tempo">
+                                <b>tempo</b>
+                            </div>
+                            <div className="div-item-card-element" id="delete">
+
+                            </div>
+                        </div>
+                        {tabsByUser.map((tab) => (
+                            <ItemCard key={tab.id} cardData={tab}/>
+                        ))}
+                    </div>
                 </div>
                 <h2>Tunings</h2>
                 <ButtonCreateNew/>

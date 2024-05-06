@@ -1,7 +1,7 @@
 .div-dashboard-flex {
     display: flex;
-    overflow: hidden;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
 }
 
 .div-dashboard-flex-vertical {
@@ -21,10 +21,13 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
+    background: #2f2f2f;
+}
+
+::-webkit-slider-container {
     background: rgba(241, 241, 241, 0.1);
     border-radius: 12px;
 }
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #838383;
@@ -34,4 +37,16 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+
+.div-tab-cards-vertical {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: start;
+    align-items: start;
+    border-top: 1px solid #595959;
+    border-bottom: 1px solid #595959;
+    overflow: auto;
+    max-height: 500px;
 }

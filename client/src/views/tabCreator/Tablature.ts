@@ -63,7 +63,7 @@ export default class Tablature {
             lines.push(line);
         }
 
-        return lines.join("\n"); // Join all lines into a complete tablature.
+        return lines.join("\n");
     }
 
 }

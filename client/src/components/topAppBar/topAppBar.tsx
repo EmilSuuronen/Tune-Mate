@@ -135,7 +135,8 @@ function TopAppBar(noteState: any) {
                     <p>Tempo</p>
                     <input name="tempo" type="number" value={formData.tempo} onChange={handleChange}
                            className='input-project-tempo'
-                           placeholder="tempo" required/>
+                           placeholder="tempo" required
+                    />
                     <button className="button-color" onClick={handleOpenModal} type="submit">Save</button>
                     <button className="button-color-red" onClick={handleOpenDeleteModal} type="submit">Delete</button>
                 </div>
