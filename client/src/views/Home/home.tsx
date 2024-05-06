@@ -9,10 +9,6 @@ const Home = () => {
         navigate('/register')
     }
 
-    function navigateToLogin() {
-        navigate('/login')
-    }
-
     function navigateToDashBoard() {
         navigate('/dashboard')
     }

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import SideNav from "../../components/sidenav/sidenav";
 import './dashboard.css'
 import ButtonCreateNew from "../../components/buttonCreateNew/buttonCreateNew";
-import {useMutation, useQuery} from "@apollo/client";
+import {useQuery} from "@apollo/client";
 import {FIND_TAB_BY_USER} from "../graphql/tabTypes";
 import ItemCard from "../../components/dashBoardItemCard/dashBoardItemCard";
 import Tab from "../tabCreator/TabInterface";
