@@ -1,11 +1,13 @@
 export default class Tablature {
-    strings: Record<number, string[]>; // Dictionary where keys are string numbers and values are arrays of notes.
+    strings: Record<number, string[]>;
+    name: string = "";
+    tempo: string = "";
 
     constructor() {
         this.strings = {};
 
         // Initialize each string with an array of 48 positions
-        for (let i = 1; i <= 6; i++) { // Adjust for other instruments as needed.
+        for (let i = 1; i <= 6; i++) {
             this.strings[i] = Array(48).fill(null);
         }
     }
@@ -23,6 +25,11 @@ export default class Tablature {
             console.error("Invalid string or position value.");
         }
         return this.strings[string][position];
+    }
+
+    setProperties(name: string, tempo: string) {
+        this.name = name;
+        this.tempo = tempo;
     }
 
     toString(): string {
@@ -56,7 +63,7 @@ export default class Tablature {
             lines.push(line);
         }
 
-        return lines.join("\n"); // Join all lines into a complete tablature.
+        return lines.join("\n");
     }
 
 }

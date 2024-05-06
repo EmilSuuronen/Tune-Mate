@@ -17,6 +17,15 @@
     margin: 12px;
 }
 
+.button-color-red {
+    padding: 12px;
+    background-color: #ff003b;
+    color: white;
+    border-radius: 24px;
+    border: none;
+    margin: 12px;
+}
+
 .button-color:hover {
     background-color: #0075d5;
     color: white;

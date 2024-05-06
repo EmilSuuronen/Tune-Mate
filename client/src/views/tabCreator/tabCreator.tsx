@@ -3,15 +3,44 @@ import Tablature from "./Tablature";
 import './tabCreator.css';
 import TopAppBar from "../../components/topAppBar/topAppBar";
 import jsPDF from "jspdf";
+import {useParams} from "react-router-dom";
+import {useMutation, useQuery} from "@apollo/client";
+import {FIND_TAB_BY_ID} from "../graphql/tabTypes";
+import SideNav from "../../components/sidenav/sidenav";
 
 const TabCreator: React.FC = () => {
     const [noteState, setNoteState] = useState(new Tablature());
     const [tablatureDisplay, setTablatureDisplay] = useState<string>("");
+    const tabId = useParams();
+
+    const { loading, error, data } = useQuery(FIND_TAB_BY_ID, {
+        variables: { input: { id: tabId.id } }
+    });
+
+    const updateNoteStateFromGraphQL = (tabData: any) => {
+        const newNoteState = new Tablature();
+
+        Object.keys(tabData).forEach(key => {
+            if (key.startsWith('string') && Array.isArray(tabData[key])) {
+                const stringIndex = parseInt(key.replace('string', ''), 10); // Converts 'string1' to 1
+                tabData[key].forEach((note: string, index: number) => {
+                    if (note !== null) {
+                        newNoteState.setNote(stringIndex, index, note);
+                    }
+                });
+            }
+            newNoteState.setProperties(tabData.name, tabData.tempo)
+        });
+        return newNoteState;
+    };
 
     useEffect(() => {
-        setTablatureDisplay(noteState.toString())
-        console.log("tabCreator user ID:" + localStorage.getItem("currentUser"));
-    }, [noteState])
+        if (data && data.findTabById) {
+            const updatedNoteState = updateNoteStateFromGraphQL(data.findTabById);
+            setNoteState(updatedNoteState);
+            setTablatureDisplay(updatedNoteState.toString()); // Update this method if necessary
+        }
+    }, [data]);
 
     const handleNoteChange = (string: number, position: number, value: string) => {
         noteState.setNote(string, position, value);
@@ -25,7 +54,6 @@ const TabCreator: React.FC = () => {
 
         setNoteState(newNoteState); // Set the new instance as state.
         setTablatureDisplay(noteState.toString());
-        console.log(noteState)
     };
 
     const stringNames = ["E", "A", "D", "G", "B", "e"];
@@ -57,14 +85,19 @@ const TabCreator: React.FC = () => {
         );
     };
 
+    if (loading) return <p>Loading...</p>;
+
     return (
-        <div className="div-tab-editor-main-container">
-            <TopAppBar noteState={noteState}/>
-            <h3>Note Editor</h3>
-            {Array.from({length: 6}, (_, i) => renderStringFields(i + 1))}
-            <div className="tablature-display">
-                <pre>{tablatureDisplay}</pre>
-                <button className="button-color" onClick={() => downloadPdfFile(tablatureDisplay)}>Download PDF</button>
+        <div className="tab-editor-full-container">
+            <SideNav/>
+            <div className="div-tab-editor-main-container">
+                <TopAppBar noteState={noteState}/>
+                <h3>Note Editor</h3>
+                {Array.from({length: 6}, (_, i) => renderStringFields(i + 1))}
+                <div className="tablature-display">
+                    <pre>{tablatureDisplay}</pre>
+                    <button className="button-color" onClick={() => downloadPdfFile(tablatureDisplay)}>Download PDF</button>
+                </div>
             </div>
         </div>
     );

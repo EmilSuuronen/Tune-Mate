@@ -1,6 +1,7 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
+//'http://localhost:4000/graphql'
 const httpLink = createHttpLink({
     uri: 'https://tune-mate.azurewebsites.net/graphql',
 });
