@@ -11,10 +11,6 @@
     top: 0;
 }
 
-.div-nav-main:hover{
-    width: 60px;
-}
-
 .sidenav-icon-text {
     margin: 0;
     font-size: 12px;
@@ -27,6 +23,10 @@
     align-items: center;
     margin: 12px;
     cursor: pointer;
+}
+
+.sidenav-icon-container:hover {
+    color: #858585;
 }
 
 .sidebar-icon-container {
