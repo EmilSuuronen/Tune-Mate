@@ -30,18 +30,10 @@ const TabCreator: React.FC = () => {
                     }
                 });
             }
+            newNoteState.setProperties(tabData.name, tabData.tempo)
         });
-
         return newNoteState;
     };
-
-    /*useEffect(() => {
-        if (data && data.findTabById) {
-            setTestTab(JSON.stringify(testTab));
-        }
-        console.log("tab by id:" + testTab);
-        setTablatureDisplay(noteState.toString())
-    }, [noteState]) */
 
     useEffect(() => {
         if (data && data.findTabById) {

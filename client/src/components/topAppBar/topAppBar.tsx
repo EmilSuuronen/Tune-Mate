@@ -5,7 +5,7 @@ import {CREATE_TAB, MODIFY_TAB} from "../../views/graphql/tabTypes";
 import Modal from "../popupModal/popupModal";
 import {useNavigate, useParams} from 'react-router-dom';
 
-function TopAppBar(noteState: any) {
+function TopAppBar(noteState: any, tablature: any) {
 
     const navigate = useNavigate();
 
@@ -13,11 +13,15 @@ function TopAppBar(noteState: any) {
 
     const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-    const handleOpenModal = () => setModalOpen(true);
-
+    function handleOpenModal() {
+        if (formData.name !== "" && formData.tempo !== 0) {
+            setModalOpen(true);
+        }
+    }
+    
     const [formData, setFormData] = useState({
-        name: '',
-        tempo: 120,
+        name: noteState.noteState.name,
+        tempo: noteState.noteState.tempo,
         string1: noteState.noteState.strings[1],
         string2: noteState.noteState.strings[2],
         string3: noteState.noteState.strings[3],
@@ -28,16 +32,16 @@ function TopAppBar(noteState: any) {
     });
 
     const [createTab] = useMutation(CREATE_TAB);
-    const [modifyTab, { data, loading, error }] = useMutation(MODIFY_TAB);
+    const [modifyTab, {data, loading, error}] = useMutation(MODIFY_TAB);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-            const { name, value } = e.target;
-
-            setFormData(prevData => ({
-                ...prevData,
-                [name]: value,
-            }));
-            console.log(value)
+        const {name, value} = e.target;
+        const valueAsNumber = name === 'tempo' ? parseInt(value, 10) : value;
+        setFormData(prevData => ({
+            ...prevData,
+            [name]: valueAsNumber,
+        }));
+        console.log(value)
     };
 
     const handleOnSaveClick = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,13 +56,10 @@ function TopAppBar(noteState: any) {
             string6: noteState.noteState.strings[6],
             owner: localStorage.getItem('currentUser') || ''
         })
-
-        console.log("loggedinas ID From topAppBar: ", localStorage.getItem('currentUser'));
         setModalOpen(true);
     };
 
     const handleConfirmSave = async () => {
-        console.log("tabID: " + tabId.id)
         if (tabId.id) {
             try {
                 await modifyTab({
@@ -69,14 +70,13 @@ function TopAppBar(noteState: any) {
                 });
                 console.log('Tab modified successfully!');
                 setModalOpen(false);
-                console.log
             } catch (err) {
                 console.error('Error modifying Tab:', err);
                 setModalOpen(false);
             }
         } else {
             try {
-                await createTab({ variables: { input: formData } });
+                await createTab({variables: {input: formData}});
                 console.log('Tab created successfully!');
                 setModalOpen(false);
             } catch (err) {
@@ -95,10 +95,11 @@ function TopAppBar(noteState: any) {
             <h2 className="top-app-bar-main-text" onClick={handleNavigateToHome}>TuneMate</h2>
             <form onSubmit={handleOnSaveClick}>
                 <input name="name" value={formData.name} onChange={handleChange} className='input-project-name'
-                       placeholder="name"/>
-                <input name="tempo" type="number" value={formData.tempo} onChange={handleChange} className='input-project-tempo'
-                       placeholder="tempo"/>
-                <button className="button-color" onClick={handleOpenModal} type="submit" >Save</button>
+                       placeholder="name" required/>
+                <input name="tempo" type="number" value={formData.tempo} onChange={handleChange}
+                       className='input-project-tempo'
+                       placeholder="tempo" required/>
+                <button className="button-color" onClick={handleOpenModal} type="submit">Save</button>
             </form>
             <Modal
                 isOpen={modalOpen}

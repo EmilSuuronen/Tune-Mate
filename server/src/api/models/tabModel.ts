@@ -7,7 +7,7 @@ const TabModel = new mongoose.Schema<Tab>({
         required: true,
     },
     tempo: {
-        type: String,
+        type: Number,
         required: true,
     },
     string1: {
