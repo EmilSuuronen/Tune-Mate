@@ -9,6 +9,7 @@ import Login from "./views/login/login";
 import Home from "./views/Home/home";
 import Register from "./views/register/register";
 import TabCreator from "./views/tabCreator/tabCreator";
+import GuitarTuner from "./views/tuner/guitarTuner";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
                       <Route path="/dashboard" element={<DashBoard/>}/>
                       <Route path="/tabCreator" element={<TabCreator />} />
                       <Route path="/tabCreator/:id" element={<TabCreator />} />
+                      <Route path="/tuner" element={<GuitarTuner/>}/>
                   </Routes>
               </BrowserRouter>
           </ApolloProvider>

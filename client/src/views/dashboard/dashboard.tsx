@@ -6,6 +6,7 @@ import {useQuery} from "@apollo/client";
 import {FIND_TAB_BY_USER} from "../graphql/tabTypes";
 import ItemCard from "../../components/dashBoardItemCard/dashBoardItemCard";
 import Tab from "../tabCreator/TabInterface";
+import {AppCard} from "../../components/appCard/appCard";
 
 function DashBoard() {
     const userId = localStorage.getItem("currentUser");
@@ -32,6 +33,10 @@ function DashBoard() {
             <SideNav/>
             <div className="div-dashboard-flex-vertical">
                 <h1>Welcome to TuneMate{", " + localStorage.getItem("currentUserName")}</h1>
+                <h2>Apps</h2>
+                <div className="div-tab-cards-horizontal">
+                    <AppCard/>
+                </div>
                 <h2>Tabs</h2>
                 <div className="div-tab-cards-horizontal">
                     <ButtonCreateNew/>
