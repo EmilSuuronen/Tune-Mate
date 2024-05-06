@@ -51,4 +51,4 @@ const MODIFY_TAB = gql`
     }
 `;
 
-export {CREATE_TAB, FIND_TAB_BY_USER};
+export {CREATE_TAB, FIND_TAB_BY_USER, MODIFY_TAB};
