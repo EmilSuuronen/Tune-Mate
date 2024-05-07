@@ -71,6 +71,28 @@ type TabByOwnerOutput = {
     owner: Types.ObjectId;
 }
 
+type Tuning = Partial<Document & {
+    id: Types.ObjectId | string;
+    name: string;
+    string_count: number;
+    string_notes: [string];
+    owner: Types.ObjectId;
+}>
+
+type TuningInput = {
+    name: string;
+    string_count: number;
+    string_notes: [string];
+    owner: Types.ObjectId;
+}
+
+type TuningByOwnerInput = {
+    input: Types.ObjectId | string;
+}
+
+type TuningByIdInput = {
+    id: Types.ObjectId | string;
+}
 
 export {
     User,
@@ -84,4 +106,8 @@ export {
     TabByOwnerInput,
     TabInput,
     TabByIdInput,
+    Tuning,
+    TuningInput,
+    TuningByOwnerInput,
+    TuningByIdInput,
 };

@@ -6,9 +6,9 @@
 
 .div-dashboard-flex-vertical {
     flex-direction: column;
-    padding: 12px;
-    width: 100%;
     text-align: start;
+    width: 100%;
+    padding: 12px;
 }
 
 .div-tab-cards-horizontal {
