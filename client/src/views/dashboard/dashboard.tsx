@@ -18,10 +18,6 @@ function DashBoard() {
     const [tabsByUser, setTabsByUser] = useState<Tab[]>([]);
     const [tuningsByUser, setTuningsByUser] = useState<Tuning[]>([]);
 
-    if (userId) {
-        console.log("userId " + userId);
-    }
-
     const {loading: loadingTabs, data: tabsData} = useQuery(FIND_TAB_BY_USER, {
         variables: {input: {input: userId}}
     });
@@ -37,7 +33,6 @@ function DashBoard() {
         if (tuningsData && tuningsData.findTuningsByOwner) {
             setTuningsByUser(tuningsData.findTuningsByOwner);
         }
-        console.log("tuningsbyOwner" + JSON.stringify(tuningsByUser))
     }, [tabsData, tabsByUser, tuningsData, tuningsByUser]);
 
     if (loadingTabs || loadingTunings) return <p>Loading...</p>;

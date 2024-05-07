@@ -3,7 +3,7 @@ import './tuningCreator.css';
 import {useParams} from "react-router-dom";
 import {useMutation, useQuery} from "@apollo/client";
 import SideNav from "../../components/sidenav/sidenav";
-import {CREATE_TUNING} from "../graphql/tuningTypes";
+import {CREATE_TUNING, FIND_TUNING_BY_ID, MODIFY_TUNING} from "../graphql/tuningTypes";
 import TUNING_NOTES from "./tuningHelpers";
 import TuningModal from "./tuningModal";
 import {MdMusicNote} from "react-icons/md";
@@ -15,13 +15,33 @@ export default function TuningCreator() {
     const [selectedString, setSelectedString] = useState(0);
     const [stringCount, setStringCount] = useState<number>(6);
     const [stringNotes, setStringNotes] = useState<string[]>(new Array(6).fill('E'));
-    const [createTuning, {data, loading, error}] = useMutation(CREATE_TUNING);
+    const [tuningName, setTuningName] = useState<string>('Untitled Tuning');
+
+    const [createTuning, {data: createTuningData, loading: createTuningLoading}] = useMutation(CREATE_TUNING);
+    const {data: findTuningData, loading: findTuningLoading} = useQuery(FIND_TUNING_BY_ID, {
+        variables: {input: {id: tuningId.id}}
+    });
+    const [modifyTuning, {data: modifyTuningData, loading: modifyTuningLoading}] = useMutation(MODIFY_TUNING);
+
     const [input, setInput] = useState({
         name: '',
         string_count: 6,
         string_notes: Array(6).fill('E'),
         owner: localStorage.getItem('currentUser') || ''
     });
+
+    useEffect(() => {
+        if (findTuningData && findTuningData.findTuningsById) {
+            setInput({
+                name: findTuningData.findTuningsById.name,
+                string_count: findTuningData.findTuningsById.string_count,
+                string_notes: findTuningData.findTuningsById.string_notes,
+                owner: findTuningData.findTuningsById.owner
+            });
+            setStringCount(findTuningData.findTuningsById.string_count);
+            setStringNotes(findTuningData.findTuningsById.string_notes);
+        }
+    }, [findTuningData]);
 
     // Adjust the number of strings and reset notes when string count changes
     const handleStringCountChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -37,35 +57,48 @@ export default function TuningCreator() {
         setModalShow(false);
     };
 
+    const handleOnInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setTuningName(event.target.value);
+    }
+
     const handleSubmit = async () => {
         const currentUser = localStorage.getItem('currentUser') || '';
-
         setInput({
-            name: "Custom Tuning",
+            name: tuningName,
             string_count: stringCount,
             string_notes: stringNotes,
             owner: currentUser
         });
-
-        console.log("createTuning input:" + input);
-
-        try {
-            const response = await createTuning({
-                variables: {input}
-            });
-            console.log('Tuning created successfully:', response.data.createTuning);
-        } catch (error: any) {
-            if (error.graphQLErrors) {
-                console.error("Network error:", error.graphQLErrors);
-            } else if (error.graphQLErrors) {
-                console.error(error.graphQLErrors)
-            } else {
-                console.error("Error creating tuning", error);
+        if (tuningId.id) {
+            try {
+                const response = await modifyTuning({
+                    variables: {id: tuningId.id, input: input}
+                });
+                console.log('Tuning created successfully:', response.data.createTuning);
+            } catch (error: any) {
+                if (error.graphQLErrors) {
+                    console.error("Network error:", error.graphQLErrors);
+                } else {
+                    console.error("Error creating tuning", error);
+                }
+            }
+        } else {
+            try {
+                const response = await createTuning({
+                    variables: {input: input}
+                });
+                console.log('Tuning created successfully:', response.data.createTuning);
+            } catch (error: any) {
+                if (error.graphQLErrors) {
+                    console.error("Network error:", error.graphQLErrors);
+                } else {
+                    console.error("Error creating tuning", error);
+                }
             }
         }
-    };
+    }
 
-    if (loading) return <p>Loading...</p>;
+    if (findTuningLoading || createTuningLoading) return <p>Loading...</p>;
 
     return (
         <div className="tuning-editor-full-container">
@@ -80,6 +113,7 @@ export default function TuningCreator() {
                             <option key={count} value={count}>{count}</option>
                         ))}
                     </select>
+                    <input onChange={handleOnInputChange}/>
                 </label>
                 <div className="tuner-buttons-container">
                     {stringNotes.map((note, index) => (
@@ -108,7 +142,7 @@ export default function TuningCreator() {
                         ))}
                     </TuningModal>
                 </div>
-                <button onClick={handleSubmit} disabled={loading}>Create Tuning</button>
+                <button onClick={handleSubmit} disabled={createTuningLoading}>Create Tuning</button>
             </div>
         </div>
     );

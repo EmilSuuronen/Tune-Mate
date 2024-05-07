@@ -1,4 +1,4 @@
-import {Tuning, TuningByOwnerInput, TuningInput} from "../../types/typeDefs";
+import {Tuning, TuningByIdInput, TuningByOwnerInput, TuningInput} from "../../types/typeDefs";
 import tuningModel from "../models/tuningModel";
 
 export default {
@@ -11,6 +11,12 @@ export default {
             if (!tunings.length) {
                 throw new Error('No tunings found yet!');
             }
+            return tunings;
+        },
+        findTuningsById: async (_parent: undefined, args: {input: TuningByIdInput}) => {
+            console.log("Received args: ", JSON.stringify(args.input.id));
+            const tunings = await tuningModel.findById(args.input.id);
+            console.log("Found tunings: ", JSON.stringify(tunings));
             return tunings;
         },
     },

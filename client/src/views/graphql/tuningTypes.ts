@@ -26,7 +26,7 @@ const FIND_TUNING_BY_USER = gql`
 
 const FIND_TUNING_BY_ID = gql`
     query FindTabById($input: FindTuningByIdInput!) {
-        findTuningById(input: $input) {
+        findTuningsById(input: $input) {
             id
             name
             string_count

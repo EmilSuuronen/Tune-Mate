@@ -23,7 +23,7 @@ input FindTuningByIdInput {
 
 type Query {
     findTuningsByOwner(input: FindTuningByOwnerInput): [Tuning],
-    findTuningById(input: FindTuningByIdInput): Tuning
+    findTuningsById(input: FindTuningByIdInput): Tuning
 }
 
 type Mutation {
