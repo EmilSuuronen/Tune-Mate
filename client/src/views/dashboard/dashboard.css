@@ -12,7 +12,13 @@
 }
 
 .div-tab-cards-horizontal {
+    display: flex;
     overflow: auto;
+}
+
+#apps.div-tab-cards-horizontal {
+    overflow: unset;
+    width: 100%;
 }
 
 ::-webkit-scrollbar {

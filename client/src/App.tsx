@@ -10,6 +10,7 @@ import Home from "./views/Home/home";
 import Register from "./views/register/register";
 import TabCreator from "./views/tabCreator/tabCreator";
 import GuitarTuner from "./views/tuner/guitarTuner";
+import TuningCreator from "./views/tuning/tuningCreator";
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
                       <Route path="/tabCreator" element={<TabCreator />} />
                       <Route path="/tabCreator/:id" element={<TabCreator />} />
                       <Route path="/tuner" element={<GuitarTuner/>}/>
+                      <Route path="/tuningCreator/" element={<TuningCreator/>}/>
+                      <Route path="/tuningCreator/:id" element={<TuningCreator />} />
                   </Routes>
               </BrowserRouter>
           </ApolloProvider>

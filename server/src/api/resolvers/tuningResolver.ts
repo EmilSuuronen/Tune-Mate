@@ -18,15 +18,27 @@ export default {
         createTuning: async (
             _parent: undefined,
             args: { input: TuningInput },
-        ): Promise<Tuning> => {
-            return await tuningModel.create(
-                {
+        ): Promise<Tuning | Error> => {
+            try {
+                // Attempt to create a new tuning entry using the provided input
+                const newTuning = await tuningModel.create({
                     name: args.input.name,
                     string_count: args.input.string_count,
                     string_notes: args.input.string_notes,
                     owner: args.input.owner,
+                });
+                console.log('Tuning created successfully:', newTuning);
+                return newTuning;
+            } catch (error: any) {
+                console.error('Error creating tuning:', error);
+
+                if (error.name === 'ValidationError') {
+                    console.error('Validation error:', error.message);
+                    throw new Error('Input validation failed. Please check your data.');
+                } else {
+                    throw new Error('Failed to create tuning. Please try again later.');
                 }
-            );
+            }
         },
         modifyTuning: async (
             _parent: undefined,
