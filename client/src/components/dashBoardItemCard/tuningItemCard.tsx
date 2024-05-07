@@ -4,6 +4,7 @@ import './dashBoardItemCard.css';
 import {useNavigate} from "react-router-dom";
 import {useMutation} from "@apollo/client";
 import {DELETE_TAB} from "../../views/graphql/tabTypes";
+import {DELETE_TUNING} from "../../views/graphql/tuningTypes";
 
 interface ItemCardProps {
     cardData: Tuning;
@@ -16,11 +17,11 @@ const TuningItem: React.FC<ItemCardProps> = ({cardData}) => {
         navigate(`/tuningCreator/${cardData.id}`);
     }
 
-    const [deleteTab, {data, loading}] = useMutation(DELETE_TAB);
+    const [deleteTuning, {data, loading}] = useMutation(DELETE_TUNING);
 
     const handleDeleteTab = async () => {
         try {
-            await deleteTab({
+            await deleteTuning({
                 variables: {id: cardData.id}
             });
             window.location.reload();
