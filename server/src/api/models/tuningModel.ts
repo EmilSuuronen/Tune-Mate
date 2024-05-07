@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import {Tuning, User} from "../../types/typeDefs";
+import {Tuning} from "../../types/typeDefs";
 
 const TuningModel = new mongoose.Schema<Tuning>({
     name: {

@@ -20,7 +20,7 @@ export default {
             args: { input: TuningInput },
         ): Promise<Tuning | Error> => {
             try {
-                // Attempt to create a new tuning entry using the provided input
+                console.log(args.input)
                 const newTuning = await tuningModel.create({
                     name: args.input.name,
                     string_count: args.input.string_count,

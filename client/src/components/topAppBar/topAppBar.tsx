@@ -22,9 +22,6 @@ function TopAppBar(noteState: any) {
 
     function handleOpenDeleteModal() {
         setDeleteModalOpen(true);
-        console.log("notestate", noteState.noteState.name)
-        console.log("formdataName", formData.name)
-        console.log("formData", formData)
     }
 
     const [formData, setFormData] = useState({
@@ -100,7 +97,7 @@ function TopAppBar(noteState: any) {
         } else {
             try {
                 await createTab({variables: {input: formData}});
-                console.log('Tab created successfully!');
+                console.log('formdata:', formData);
                 setModalOpen(false);
             } catch (err) {
                 console.error('Error creating Tablature:', err);

@@ -25,7 +25,13 @@ const TuningCreator: React.FC = () => {
     const [selectedString, setSelectedString] = useState(0);
     const [stringCount, setStringCount] = useState<number>(6);
     const [stringNotes, setStringNotes] = useState<string[]>(new Array(6).fill('E'));
-    const [createTuning, { loading, error }] = useMutation(CREATE_TUNING);
+    const [createTuning, {data, loading, error}] = useMutation(CREATE_TUNING);
+    const [input, setInput] = useState({
+        name: '',
+        string_count: 6,
+        string_notes: Array(6).fill('E'),
+        owner: localStorage.getItem('currentUser') || ''
+    });
 
     // Adjust the number of strings and reset notes when string count changes
     const handleStringCountChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -42,18 +48,30 @@ const TuningCreator: React.FC = () => {
     };
 
     const handleSubmit = async () => {
-        const input = {
-            name: "Custom Tuning", // Example name, replace with actual logic to obtain name
+        const currentUser = localStorage.getItem('currentUser') || '';
+
+        setInput({
+            name: "Custom Tuning",
             string_count: stringCount,
             string_notes: stringNotes,
-            owner: localStorage.getItem('currentUser') // Replace with actual logic to obtain owner ID
-        };
-        console.log("createtuning input: " + JSON.stringify(input));
+            owner: currentUser
+        });
+
+        console.log("createTuning input:");
+
         try {
-            await createTuning({variables: {input: {input: input} }});
-            alert('Tuning created successfully!');
-        } catch (e) {
-            console.error("Error creating tuning", e);
+            const response = await createTuning({
+                variables: {input}
+            });
+            console.log('Tuning created successfully:', response.data.createTuning);
+        } catch (error: any) {
+            if (error.graphQLErrors) {
+                console.error("Network error:", error.graphQLErrors);
+            } else if (error.graphQLErrors) {
+                    console.error( error.graphQLErrors)
+            } else {
+                console.error("Error creating tuning", error);
+            }
         }
     };
 
@@ -67,7 +85,8 @@ const TuningCreator: React.FC = () => {
                 <h1>Create Tuning</h1>
                 <label>
                     String Count:
-                    <select value={stringCount} onChange={handleStringCountChange} className="tuning-string-count-select">
+                    <select value={stringCount} onChange={handleStringCountChange}
+                            className="tuning-string-count-select">
                         {Array.from({length: 9}, (_, i) => i + 4).map(count => (
                             <option key={count} value={count}>{count}</option>
                         ))}
@@ -77,12 +96,12 @@ const TuningCreator: React.FC = () => {
                     {stringNotes.map((note, index) => (
                         <div key={index} className="tuner-button-items-container">
                             <div className="div-string-line"/>
-                            <label className="label-strings"><MdMusicNote /></label>
+                            <label className="label-strings"><MdMusicNote/></label>
                             <button onClick={() => {
                                 setSelectedString(index);
                                 setModalShow(true);
                             }}
-                            className="tuning-string-note-button"
+                                    className="tuning-string-note-button"
                             >
                                 {note}
                             </button>
