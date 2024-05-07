@@ -55,4 +55,5 @@
     border-bottom: 1px solid #595959;
     overflow: auto;
     max-height: 500px;
+    padding: 12px;
 }

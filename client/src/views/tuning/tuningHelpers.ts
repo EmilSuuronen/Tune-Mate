@@ -15,11 +15,4 @@ const TUNING_NOTES = [
     ["D#", "G#", "C#", "F#", "A#", "D#"]
 ];
 
-interface TuningInput {
-    name: string;
-    string_count: number;
-    string_notes: string[];
-    owner: string;
-}
-
 export default TUNING_NOTES;

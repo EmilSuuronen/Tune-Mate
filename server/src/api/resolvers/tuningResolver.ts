@@ -4,8 +4,8 @@ import tuningModel from "../models/tuningModel";
 export default {
     Query: {
         findTuningsByOwner: async (_parent: undefined, args: {input: TuningByOwnerInput}) => {
-            console.log("Received args: ", JSON.stringify(args));
-            const ownerId = args.input.input;
+            console.log("Received args: ", JSON.stringify(args.input.id));
+            const ownerId = args.input.id;
             const tunings = await tuningModel.find({ owner: ownerId });
             console.log("Found tunings: ", JSON.stringify(tunings));
             if (!tunings.length) {

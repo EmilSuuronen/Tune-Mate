@@ -87,7 +87,7 @@ type TuningInput = {
 }
 
 type TuningByOwnerInput = {
-    input: Types.ObjectId | string;
+    id: Types.ObjectId | string;
 }
 
 type TuningByIdInput = {

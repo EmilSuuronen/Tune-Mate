@@ -1,24 +1,14 @@
 import React, {useEffect, useState} from "react";
 import './tuningCreator.css';
-import TopAppBar from "../../components/topAppBar/topAppBar";
 import {useParams} from "react-router-dom";
 import {useMutation, useQuery} from "@apollo/client";
-import {FIND_TAB_BY_ID} from "../graphql/tabTypes";
 import SideNav from "../../components/sidenav/sidenav";
 import {CREATE_TUNING} from "../graphql/tuningTypes";
 import TUNING_NOTES from "./tuningHelpers";
 import TuningModal from "./tuningModal";
 import {MdMusicNote} from "react-icons/md";
-import {CREATE_USER} from "../graphql/userTypes";
 
-interface TuningInput {
-    name: string;
-    string_count: number;
-    string_notes: string[];
-    owner: string | null;
-}
-
-const TuningCreator: React.FC = () => {
+export default function TuningCreator() {
     const tuningId = useParams();
 
     const [modalShow, setModalShow] = useState(false);
@@ -57,7 +47,7 @@ const TuningCreator: React.FC = () => {
             owner: currentUser
         });
 
-        console.log("createTuning input:");
+        console.log("createTuning input:" + input);
 
         try {
             const response = await createTuning({
@@ -68,7 +58,7 @@ const TuningCreator: React.FC = () => {
             if (error.graphQLErrors) {
                 console.error("Network error:", error.graphQLErrors);
             } else if (error.graphQLErrors) {
-                    console.error( error.graphQLErrors)
+                console.error(error.graphQLErrors)
             } else {
                 console.error("Error creating tuning", error);
             }
@@ -81,7 +71,6 @@ const TuningCreator: React.FC = () => {
         <div className="tuning-editor-full-container">
             <SideNav/>
             <div className="div-tuning-editor-main-container">
-                <TopAppBar/>
                 <h1>Create Tuning</h1>
                 <label>
                     String Count:
@@ -124,5 +113,3 @@ const TuningCreator: React.FC = () => {
         </div>
     );
 };
-
-export default TuningCreator;
