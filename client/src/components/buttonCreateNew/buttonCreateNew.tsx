@@ -2,11 +2,12 @@ import React from 'react';
 import './buttonCreateNew.css'
 import {useNavigate} from "react-router-dom";
 
-function ButtonCreateNew() {
+function ButtonCreateNew(navLocation: any) {
     const navigate = useNavigate()
 
     function navigateToTabs() {
-        navigate('/tabCreator')
+        console.log("navLocation" + JSON.stringify(navLocation))
+        navigate(navLocation.navLocation)
     }
 
     return (

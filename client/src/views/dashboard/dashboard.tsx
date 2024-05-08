@@ -51,7 +51,7 @@ function DashBoard() {
                 </div>
                 <h2>Tabs</h2>
                 <div className="div-tab-cards-horizontal">
-                    <ButtonCreateNew/>
+                    <ButtonCreateNew navLocation="/tabCreator"/>
                     {tabsByUser.length < 1 ? (
                         <i className="info-text-nocontent">{isLoggedIn() ? "No tabs yet. Get started by creating one" : "Log in to save tabs"}</i>) : (
                         <div className="div-tab-cards-vertical">
@@ -73,7 +73,7 @@ function DashBoard() {
                 </div>
                 <h2>Tunings</h2>
                 <div className="div-tab-cards-horizontal">
-                    <ButtonCreateNew/>
+                    <ButtonCreateNew navLocation="/tuningCreator"/>
                     {tuningsByUser.length < 1 ? (
                         <i className="info-text-nocontent">{isLoggedIn() ? "No tunings yet. Get started by creating one" : "Log in to save tunings"}</i>) : (
                         <div className="div-tab-cards-vertical">
