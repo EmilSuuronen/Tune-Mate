@@ -9,6 +9,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 100%;
 }
 
 .tuning-string-note-button {
@@ -66,4 +67,31 @@
     background-color: rgba(255, 121, 196, 0.5);
     transform: translateY(-50%);
     position: absolute;
+}
+
+.div-top-selectors {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    padding: 24px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#input-name-tuning.input-rounded {
+    position: absolute;
+    left: 20px;
+}
+
+.label-tuning-strings {
+    position: absolute;
+    right: 120px;
+    transform: scale(0.8);
+}
+
+#save-button.button-color {
+    position: absolute;
+    right: 20px;
 }

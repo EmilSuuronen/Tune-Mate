@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Tab from "../../views/tabCreator/TabInterface";
 import './dashBoardItemCard.css';
 import {FaItunesNote} from "react-icons/fa";
 import {useNavigate} from "react-router-dom";
 import {useMutation} from "@apollo/client";
 import {DELETE_TAB} from "../../views/graphql/tabTypes";
+import Modal from "../popupModal/popupModal";
 
 interface ItemCardProps {
     cardData: Tab;
@@ -12,6 +13,11 @@ interface ItemCardProps {
 
 const ItemCard: React.FC<ItemCardProps> = ({cardData}) => {
     const navigate = useNavigate();
+    const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+    function handleOpenModal() {
+        setModalOpen(true);
+    }
 
     function handleNavigateToTab() {
         navigate(`/tabCreator/${cardData.id}`);
@@ -38,9 +44,16 @@ const ItemCard: React.FC<ItemCardProps> = ({cardData}) => {
             <div className="div-item-card-element" id="tempo">
                 {cardData.tempo} bpm
             </div>
-            <div className="div-item-card-element" id="delete" onClick={handleDeleteTab}>
+            <div className="div-item-card-element" id="delete" onClick={handleOpenModal}>
                 Delete
             </div>
+            <Modal
+                isOpen={modalOpen}
+                text="Are you sure?"
+                onCancel={() => setModalOpen(false)}
+                onOk={handleDeleteTab}
+                isLoading={loading}
+            />
         </div>
     );
 }

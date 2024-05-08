@@ -2,6 +2,7 @@ import React from 'react';
 import './sidenav.css'
 import { LuLogOut, LuHome, LuUser} from "react-icons/lu";
 import {useNavigate} from "react-router-dom";
+import { CgLogOut } from "react-icons/cg";
 
 function SideNav() {
 
@@ -27,7 +28,7 @@ function SideNav() {
                 <p className="sidenav-icon-text">User</p>
             </div>
             <div className="sidenav-icon-container" id="logout-icon-div" onClick={handleLogout}>
-                <LuLogOut className="sidebar-icon"/>
+                <CgLogOut  className="sidebar-icon"/>
                 <p className="sidenav-icon-text">Log out</p>
             </div>
         </div>

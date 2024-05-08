@@ -16,7 +16,7 @@ const TuningModal: React.FC<ModalProps> = ({show, onClose, children}) => {
         <div className="tuning-modal-overlay">
             <div className="tuning-modal-content">
                 {children}
-                <button onClick={onClose} style={{marginTop: 20}}>Close</button>
+                <button className="button-color" onClick={onClose} style={{marginTop: 20}}>Close</button>
             </div>
         </div>
     );

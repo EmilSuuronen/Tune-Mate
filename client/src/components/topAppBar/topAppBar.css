@@ -1,27 +1,24 @@
 .div-top-app-bar-main {
     display: flex;
+    position: relative;
     width: 100%;
-    min-width: 5%;
+    padding: 24px;
     top: 0;
-    background-color: #2c2c2c;
+    background-color: rgba(0, 0, 0, 0.2);
     box-shadow: 0px 0px 16px 3px rgba(0,0,0,0.75);
     align-items: center;
 }
 
-.input-project-name {
-    height: 30px;
-    width: 40%;
-    min-width: 150px;
-    border-radius: 120px;
-    border: 0;
-    color: black;
-    text-align: center;
+#input-project-name {
+    left: 20px;
+    position: absolute;
 }
 
-.input-project-tempo {
-    height: 30px;
+#input-project-tempo {
+    position: absolute;
+    right: 248px;
     border-radius: 120px;
-    width: 10%;
+    width: 60px;
     min-width: 50px;
     border: 0;
     color: black;
@@ -47,4 +44,14 @@
     flex: 1;
     justify-content: end;
     align-items: center;
+}
+
+#button-delete {
+    position: absolute;
+    right: 50px;
+}
+
+#button-save {
+    position: absolute;
+    right: 120px;
 }

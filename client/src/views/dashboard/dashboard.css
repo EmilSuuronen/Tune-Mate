@@ -57,3 +57,8 @@
     max-height: 500px;
     padding: 12px;
 }
+
+.info-text-nocontent {
+    width: 100%;
+    text-align: center;
+}

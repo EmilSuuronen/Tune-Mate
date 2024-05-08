@@ -124,19 +124,16 @@ function TopAppBar(noteState: any) {
     return (
         <div className='div-top-app-bar-main'>
             <form onSubmit={handleOnSaveClick} className="top-app-bar-form">
-                <div className="top-app-bar-name">
-                    <input name="name" value={formData.name} onChange={handleChange} className='input-project-name'
-                           placeholder="name" required/>
-                </div>
-                <div className="top-app-bar-functions">
-                    <p>Tempo</p>
-                    <input name="tempo" type="number" value={formData.tempo} onChange={handleChange}
-                           className='input-project-tempo'
-                           placeholder="tempo" required
-                    />
-                    <button className="button-color" onClick={handleOpenModal} type="submit">Save</button>
-                    <button className="button-color-red" onClick={handleOpenDeleteModal} type="submit">Delete</button>
-                </div>
+                <input name="name" value={formData.name} onChange={handleChange} className="input-rounded"
+                       id='input-project-name'
+                       placeholder="name" required/>
+                <input name="tempo" type="number" value={formData.tempo} onChange={handleChange}
+                       className="input-rounded"
+                       id='input-project-tempo'
+                       placeholder="tempo" required
+                />
+                <button className="button-color" id="button-save" onClick={handleOpenModal} type="submit">Save</button>
+                <button className="button-color-red" id="button-delete"onClick={handleOpenDeleteModal} type="submit">Delete</button>
             </form>
             <Modal
                 isOpen={modalOpen}

@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
 import './tuningCreator.css';
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useMutation, useQuery} from "@apollo/client";
 import SideNav from "../../components/sidenav/sidenav";
 import {CREATE_TUNING, FIND_TUNING_BY_ID, MODIFY_TUNING} from "../graphql/tuningTypes";
 import TUNING_NOTES from "./tuningHelpers";
 import TuningModal from "./tuningModal";
 import {MdMusicNote} from "react-icons/md";
+import Modal from "../../components/popupModal/popupModal";
 
 export default function TuningCreator() {
     const tuningId = useParams();
@@ -16,6 +17,12 @@ export default function TuningCreator() {
     const [stringCount, setStringCount] = useState<number>(6);
     const [stringNotes, setStringNotes] = useState<string[]>(new Array(6).fill('E'));
     const [tuningName, setTuningName] = useState<string>('Untitled Tuning');
+    const [saveModalOpen, setSaveModalOpen] = useState<boolean>(false);
+    const navigate = useNavigate();
+
+    function handleOpenSaveModal() {
+        setSaveModalOpen(true);
+    }
 
     const [createTuning, {data: createTuningData, loading: createTuningLoading}] = useMutation(CREATE_TUNING);
     const {data: findTuningData, loading: findTuningLoading} = useQuery(FIND_TUNING_BY_ID, {
@@ -27,7 +34,7 @@ export default function TuningCreator() {
         name: '',
         string_count: 6,
         string_notes: Array(6).fill('E'),
-        owner: localStorage.getItem('currentUser') || ''
+        owner: localStorage.getItem('currentUser')
     });
 
     useEffect(() => {
@@ -38,6 +45,7 @@ export default function TuningCreator() {
                 string_notes: findTuningData.findTuningsById.string_notes,
                 owner: findTuningData.findTuningsById.owner
             });
+            setTuningName(findTuningData.findTuningsById.name);
             setStringCount(findTuningData.findTuningsById.string_count);
             setStringNotes(findTuningData.findTuningsById.string_notes);
         }
@@ -51,6 +59,7 @@ export default function TuningCreator() {
     };
 
     const handleNoteChange = (note: any) => {
+        const currentUser = localStorage.getItem('currentUser') || '';
         const newNotes = [...stringNotes];
         newNotes[selectedString] = note;
         setStringNotes(newNotes);
@@ -63,16 +72,20 @@ export default function TuningCreator() {
 
     const handleSubmit = async () => {
         const currentUser = localStorage.getItem('currentUser') || '';
-        setInput({
+        console.log(JSON.stringify(input))
+        console.log(currentUser)
+        setSaveModalOpen(false);
+        const newInput = {
             name: tuningName,
             string_count: stringCount,
             string_notes: stringNotes,
             owner: currentUser
-        });
+        };
+        setInput(newInput);
         if (tuningId.id) {
             try {
                 const response = await modifyTuning({
-                    variables: {id: tuningId.id, input: input}
+                    variables: {id: tuningId.id, input: newInput}
                 });
                 console.log('Tuning created successfully:', response.data.createTuning);
             } catch (error: any) {
@@ -85,9 +98,10 @@ export default function TuningCreator() {
         } else {
             try {
                 const response = await createTuning({
-                    variables: {input: input}
+                    variables: {input: newInput}
                 });
                 console.log('Tuning created successfully:', response.data.createTuning);
+                navigate("/tuningCreator/" + response.data.createTuning.id);
             } catch (error: any) {
                 if (error.graphQLErrors) {
                     console.error("Network error:", error.graphQLErrors);
@@ -104,17 +118,20 @@ export default function TuningCreator() {
         <div className="tuning-editor-full-container">
             <SideNav/>
             <div className="div-tuning-editor-main-container">
-                <h1>Create Tuning</h1>
-                <label>
-                    String Count:
-                    <select value={stringCount} onChange={handleStringCountChange}
-                            className="tuning-string-count-select">
-                        {Array.from({length: 9}, (_, i) => i + 4).map(count => (
-                            <option key={count} value={count}>{count}</option>
-                        ))}
-                    </select>
-                    <input onChange={handleOnInputChange}/>
-                </label>
+                <div className="div-top-selectors">
+                    <input className="input-rounded" id="input-name-tuning" onChange={handleOnInputChange} placeholder='Name'/>
+                    <label className="label-tuning-strings">
+                        Strings:
+                        <select value={stringCount} onChange={handleStringCountChange}
+                                className="tuning-string-count-select">
+                            {Array.from({length: 9}, (_, i) => i + 4).map(count => (
+                                <option key={count} value={count}>{count}</option>
+                            ))}
+                        </select>
+                    </label>
+                    <button className="button-color" id="save-button" onClick={handleOpenSaveModal} disabled={createTuningLoading}>save</button>
+                </div>
+                <h1> Tuning Creator</h1>
                 <div className="tuner-buttons-container">
                     {stringNotes.map((note, index) => (
                         <div key={index} className="tuner-button-items-container">
@@ -134,7 +151,7 @@ export default function TuningCreator() {
                         {TUNING_NOTES.map((row, rowIndex) => (
                             <div key={rowIndex} style={{margin: '10px 0'}}>
                                 {row.map((note, noteIndex) => (
-                                    <button key={noteIndex} onClick={() => handleNoteChange(note)}>
+                                    <button className="tuning-modal-button" key={noteIndex} onClick={() => handleNoteChange(note)}>
                                         {note}
                                     </button>
                                 ))}
@@ -142,8 +159,13 @@ export default function TuningCreator() {
                         ))}
                     </TuningModal>
                 </div>
-                <button onClick={handleSubmit} disabled={createTuningLoading}>Create Tuning</button>
             </div>
+            <Modal
+                    isOpen={saveModalOpen}
+                text="Confirm Save?"
+                onCancel={() => setSaveModalOpen(false)}
+                onOk={handleSubmit}
+            />
         </div>
     );
 };

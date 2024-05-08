@@ -19,3 +19,21 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
+
+.tuning-modal-button {
+    padding: 12px;
+    margin: 4px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: #fd154d;
+    border-radius: 100%;
+    color: white;
+}
+
+.tuning-modal-button:hover {
+    background-color: #ff6289;
+    color: black;
+}
+
+

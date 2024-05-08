@@ -10,7 +10,7 @@ const GuitarTuner: React.FC = () => {
     const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
     const [frequency, setFrequency] = useState<number>(40);
     const [isListening, setIsListening] = useState<boolean>(false);
-    const [targetFrequency, setTargetFrequency] = useState<number>(42);
+    const [targetFrequency, setTargetFrequency] = useState<number>(40);
     const [tuningsByUser, setTuningsByUser] = useState<Tuning[]>([]);
     const [formattedTunings, setFormattedTunings] = useState<TuningFormatted[]>([]);
     const userId = localStorage.getItem("currentUser");
@@ -161,7 +161,7 @@ const GuitarTuner: React.FC = () => {
     };
 
     const frequencies = [];
-    for (let i = 40; i <= 500; i += 50) {
+    for (let i = 40; i <= 500; i += 20) {
         frequencies.push(i);
     }
 

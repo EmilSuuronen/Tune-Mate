@@ -52,7 +52,7 @@ function DashBoard() {
                 <div className="div-tab-cards-horizontal">
                     <ButtonCreateNew/>
                     {tabsByUser.length < 1 ? (
-                        <i> No tabs yet. Get started by creating one.</i> ) : (
+                        <i className="info-text-nocontent"> No tabs yet. Get started by creating one.</i> ) : (
                         <div className="div-tab-cards-vertical">
                             <div className="div-item-card-main" id="titles">
                                 <div className="div-item-card-element" id="name">
@@ -74,7 +74,7 @@ function DashBoard() {
                 <div className="div-tab-cards-horizontal">
                     <ButtonCreateNew/>
                     {tuningsByUser.length < 1 ? (
-                        <i> No tabs yet. Get started by creating one.</i> ) : (
+                        <i className="info-text-nocontent"> No Tunings yet. Get started by creating one.</i> ) : (
                         <div className="div-tab-cards-vertical">
                             <div className="div-item-card-main" id="titles">
                                 <div className="div-item-card-element" id="name">
@@ -89,8 +89,6 @@ function DashBoard() {
                         </div>
                     )}
                 </div>
-                <h2>Chords</h2>
-                <ButtonCreateNew/>
             </div>
         </div>
     );
