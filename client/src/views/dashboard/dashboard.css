@@ -6,13 +6,19 @@
 
 .div-dashboard-flex-vertical {
     flex-direction: column;
-    padding: 12px;
-    width: 100%;
     text-align: start;
+    width: 100%;
+    padding: 12px;
 }
 
 .div-tab-cards-horizontal {
+    display: flex;
     overflow: auto;
+}
+
+#apps.div-tab-cards-horizontal {
+    overflow: unset;
+    width: 100%;
 }
 
 ::-webkit-scrollbar {
@@ -49,4 +55,10 @@
     border-bottom: 1px solid #595959;
     overflow: auto;
     max-height: 500px;
+    padding: 12px;
+}
+
+.info-text-nocontent {
+    width: 100%;
+    text-align: center;
 }

@@ -1,0 +1,29 @@
+.register-main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 60%;
+    height: 100%;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+#form-content.register-main-container {
+    width: 30%;
+}
+
+.input-rounded {
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+#create-account.button-color {
+    width: 100%;
+    padding: 10px;
+}

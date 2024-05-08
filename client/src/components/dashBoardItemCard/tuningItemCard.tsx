@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
-import Tab from "../../views/tabCreator/TabInterface";
+import Tuning from "../../views/tuning/TuningInterface";
 import './dashBoardItemCard.css';
-import {FaItunesNote} from "react-icons/fa";
 import {useNavigate} from "react-router-dom";
 import {useMutation} from "@apollo/client";
 import {DELETE_TAB} from "../../views/graphql/tabTypes";
+import {DELETE_TUNING} from "../../views/graphql/tuningTypes";
 import Modal from "../popupModal/popupModal";
 
 interface ItemCardProps {
-    cardData: Tab;
+    cardData: Tuning;
 }
 
-const ItemCard: React.FC<ItemCardProps> = ({cardData}) => {
+const TuningItem: React.FC<ItemCardProps> = ({cardData}) => {
     const navigate = useNavigate();
     const [modalOpen, setModalOpen] = useState<boolean>(false);
 
@@ -20,14 +20,14 @@ const ItemCard: React.FC<ItemCardProps> = ({cardData}) => {
     }
 
     function handleNavigateToTab() {
-        navigate(`/tabCreator/${cardData.id}`);
+        navigate(`/tuningCreator/${cardData.id}`);
     }
 
-    const [deleteTab, {data, loading}] = useMutation(DELETE_TAB);
+    const [deleteTuning, {data, loading}] = useMutation(DELETE_TUNING);
 
     const handleDeleteTab = async () => {
         try {
-            await deleteTab({
+            await deleteTuning({
                 variables: {id: cardData.id}
             });
             window.location.reload();
@@ -40,9 +40,6 @@ const ItemCard: React.FC<ItemCardProps> = ({cardData}) => {
         <div className="div-item-card-main">
             <div className="div-item-card-element">
                 <p className="item-card-name" id="name" onClick={handleNavigateToTab}>{cardData.name}</p>
-            </div>
-            <div className="div-item-card-element" id="tempo">
-                {cardData.tempo} bpm
             </div>
             <div className="div-item-card-element" id="delete" onClick={handleOpenModal}>
                 Delete
@@ -58,4 +55,4 @@ const ItemCard: React.FC<ItemCardProps> = ({cardData}) => {
     );
 }
 
-export default ItemCard;
+export default TuningItem;

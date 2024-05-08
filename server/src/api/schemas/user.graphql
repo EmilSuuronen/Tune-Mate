@@ -16,6 +16,12 @@ input LoginInput {
   password: String
 }
 
+input UserModifyInput {
+  user_name: String
+  email: String
+  password: String
+}
+
 type LoginResponse {
   token: String
   user: User
@@ -29,5 +35,6 @@ type Query {
 type Mutation {
   createUser(input: UserInput!): User
   loginUser(input: LoginInput!): LoginResponse
+  modifyUser(id: ID!, input: UserModifyInput!): User
 }
 

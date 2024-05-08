@@ -4,6 +4,7 @@ import {useMutation} from "@apollo/client";
 import {CREATE_TAB, DELETE_TAB, MODIFY_TAB} from "../../views/graphql/tabTypes";
 import Modal from "../popupModal/popupModal";
 import {useNavigate, useParams} from 'react-router-dom';
+import isLoggedIn from "../../script/isLoggedIn";
 
 function TopAppBar(noteState: any) {
 
@@ -22,9 +23,6 @@ function TopAppBar(noteState: any) {
 
     function handleOpenDeleteModal() {
         setDeleteModalOpen(true);
-        console.log("notestate", noteState.noteState.name)
-        console.log("formdataName", formData.name)
-        console.log("formData", formData)
     }
 
     const [formData, setFormData] = useState({
@@ -99,9 +97,10 @@ function TopAppBar(noteState: any) {
             }
         } else {
             try {
-                await createTab({variables: {input: formData}});
-                console.log('Tab created successfully!');
+                const response = await createTab({variables: {input: formData}});
+                console.log('formdata:', formData);
                 setModalOpen(false);
+                navigate("/tabCreator/" + response.data.createTab.id);
             } catch (err) {
                 console.error('Error creating Tablature:', err);
                 setModalOpen(false);
@@ -127,19 +126,20 @@ function TopAppBar(noteState: any) {
     return (
         <div className='div-top-app-bar-main'>
             <form onSubmit={handleOnSaveClick} className="top-app-bar-form">
-                <div className="top-app-bar-name">
-                    <input name="name" value={formData.name} onChange={handleChange} className='input-project-name'
-                           placeholder="name" required/>
-                </div>
-                <div className="top-app-bar-functions">
-                    <p>Tempo</p>
-                    <input name="tempo" type="number" value={formData.tempo} onChange={handleChange}
-                           className='input-project-tempo'
-                           placeholder="tempo" required
-                    />
-                    <button className="button-color" onClick={handleOpenModal} type="submit">Save</button>
-                    <button className="button-color-red" onClick={handleOpenDeleteModal} type="submit">Delete</button>
-                </div>
+                <input name="name" value={formData.name} onChange={handleChange} className="input-rounded"
+                       id='input-project-name'
+                       placeholder="name" required/>
+                <input name="tempo" type="number" value={formData.tempo} onChange={handleChange}
+                       className="input-rounded"
+                       id='input-project-tempo'
+                       placeholder="tempo" required
+                />
+                {isLoggedIn() && (
+                    <>
+                        <button className="button-color" id="button-save" onClick={handleOpenModal} type="submit">Save</button>
+                        <button className="button-color-red" id="button-delete" onClick={handleOpenDeleteModal} type="submit">Delete</button>
+                    </>
+                )}
             </form>
             <Modal
                 isOpen={modalOpen}

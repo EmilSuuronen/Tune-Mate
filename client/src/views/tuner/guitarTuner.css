@@ -1,0 +1,74 @@
+.div-tuner-main {
+    display: flex;
+    height: 100%;
+    min-height: 100vh;
+}
+
+.div-tuner-content {
+    flex-direction: column;
+    padding: 12px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.slider-tuner {
+    position: relative;
+    width: 80%;
+    background-color: #151515;
+    margin: 20px auto;
+    z-index: 100;
+    height: 60px;
+    border-radius: 5px;
+    box-shadow: black 0px 0px 10px 0px;
+    font-size: 10px;
+}
+
+.slider-marker {
+    position: absolute;
+    top: -5px;
+    width: 10px;
+    height: 20px;
+    background-color: blue;
+    z-index: 2;
+}
+
+.slider-marker.target {
+    background-color: rgba(0, 255, 0, 0.8);
+    border-radius: 12px;
+}
+
+.slider-marker.current {
+    background-color: rgba(253, 95, 14, 0.8);
+    border-radius: 12px;
+}
+
+.frequency-mark {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.frequency-mark .line {
+    width: 1px;
+    height: 100%;
+    background-color: #fff;
+}
+
+.frequency-mark .label {
+    position: absolute;
+    top: 100%;
+    white-space: nowrap;
+    transform: translateX(-50%);
+    color: #fff;
+}
+
+.selector-guitar-tuner-string {
+    border: none;
+    height: 24px;
+    margin: 12px;
+}

@@ -1,0 +1,22 @@
+.tab-app-card-main-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(145deg, #0064ef, #8000d2);
+    transition: flex 0.3s;
+    border-radius: 12px;
+    padding: 18px;
+    text-shadow: 0px 0px 4px #181818;
+    margin: 4px;
+    flex: 1;
+}
+
+.tab-app-card-main-div:hover {
+    cursor: pointer;
+    flex: 1.2;
+}
+
+.tab-app-card-icon {
+    font-size: 48px;
+    text-shadow: 0px 0px 10px #000000
+}

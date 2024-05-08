@@ -33,36 +33,29 @@ export default class Tablature {
     }
 
     toString(): string {
-        const stringNames = ["E", "A", "D", "G", "B", "e"]; // Standard guitar tuning.
-        const barLength = 4; // Number of notes per bar.
-
-        // Initialize an array to store the formatted lines.
+        const stringNames = ["E", "A", "D", "G", "B", "e"];
+        const barLength = 4;
         const lines: string[] = [];
 
         for (let i = 0; i < 6; i++) {
             const stringName = stringNames[i];
             const stringNotes = this.strings[i + 1];
+            let line = `<span>${stringName}</span>|`;
 
-            // Create a string representation of each string's notes.
-            let line = `${stringName}|`;
-
-            // Split the notes into groups of 4 to form bars.
             for (let barStart = 0; barStart < stringNotes.length; barStart += barLength) {
-                // Retrieve the notes for this bar.
                 const barNotes = stringNotes.slice(barStart, barStart + barLength);
-
-                // Create a string from these notes, alternating between notes and dashes.
-                const barString = barNotes.map(note => (note === null || note === "" ? "-" : note))
-                    .flatMap(note => [note, "-"]) // Alternate between note and dash.
-                    .slice(0, barLength * 2 - 1) // Trim trailing dash.
+                const barString = barNotes.map(note => {
+                    const noteClass = (note === null || note === "") ? "-" : note;
+                    const className = noteClass.length > 1 ? 'small' : 'regular';
+                    return `<span class="${className}">${noteClass}</span>-`;
+                }).flat()
+                    .slice(0, barLength * 2 - 1)
                     .join("");
 
-                line += `${barString}|`; // Add the bar to the line.
+                line += `${barString}|`;
             }
-
             lines.push(line);
         }
-
         return lines.join("\n");
     }
 

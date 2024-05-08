@@ -1,0 +1,33 @@
+type Tuning {
+    id: ID
+    name: String
+    string_count: Int
+    string_notes: [String]
+    owner: ID
+}
+
+input TuningInput {
+    name: String
+    string_count: Int
+    string_notes: [String]
+    owner: ID
+}
+
+input FindTuningByOwnerInput {
+    id: ID!
+}
+
+input FindTuningByIdInput {
+    id: ID!
+}
+
+type Query {
+    findTuningsByOwner(input: FindTuningByOwnerInput): [Tuning],
+    findTuningsById(input: FindTuningByIdInput): Tuning
+}
+
+type Mutation {
+    createTuning(input: TuningInput!): Tuning
+    modifyTuning(id: ID!, input: TuningInput!): Tuning
+    deleteTuning(id: ID!): Tuning
+}
