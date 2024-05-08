@@ -10,6 +10,12 @@ The application also contains a guitar tuner and ability to create own tunings.
 * Create new tunings
 * Guitar tuner with your own custom tunings
 
+<img src="https://github.com/EmilSuuronen/Tune-Mate/blob/tunings/res/start.png" width="320" height="180"></img>
+<img src="https://github.com/EmilSuuronen/Tune-Mate/blob/tunings/res/dashboard.png" width="320" height="180"></img>
+<img src="https://github.com/EmilSuuronen/Tune-Mate/blob/tunings/res/note_editor.png" width="320" height="180"></img>
+<img src="https://github.com/EmilSuuronen/Tune-Mate/blob/tunings/res/tuning_creator.png" width="320" height="180"></img>
+<img src="https://github.com/EmilSuuronen/Tune-Mate/blob/tunings/res/guitar_tuner.png" width="320" height="180"></img>
+
 ## Getting Started
 ### Testing the project locally
 Download the repository and create an `.env` file in the root folder. Create an `MONGO_URI="your-mongo-connection-string` to connect with an GraphQL database of your choice.
