@@ -17,9 +17,17 @@ type LoginUser = Omit<User, 'password'>;
 
 type QueryByIdInput = Omit<User, 'password'>
 
+type UserModifyInput = Partial<Document> &{
+    user_name: string;
+    email: string;
+    password: string;
+}
+
 type TokenContent = {
-    token: string;
-    user: LoginUser;
+    id: Types.ObjectId | string;
+    user_name: string;
+    email: string;
+    password: string;
 };
 
 type Tab = Partial<Document & {
@@ -47,28 +55,12 @@ type TabInput = {
     string6: [string];
 }
 
-type TabOutput = {
-    id: string;
-    tempo: number;
-    name: string;
-    string1: [string];
-    string2: [string];
-    string3: [string];
-    string4: [string];
-    string5: [string];
-    string6: [string];
-}
-
 type TabByOwnerInput = {
     input: Types.ObjectId | string;
 }
 
 type TabByIdInput = {
     id: Types.ObjectId | string;
-}
-
-type TabByOwnerOutput = {
-    owner: Types.ObjectId;
 }
 
 type Tuning = Partial<Document & {
@@ -110,4 +102,5 @@ export {
     TuningInput,
     TuningByOwnerInput,
     TuningByIdInput,
+    UserModifyInput,
 };

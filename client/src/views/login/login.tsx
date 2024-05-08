@@ -28,6 +28,7 @@ function Login() {
             localStorage.setItem('token', response.data.loginUser.token);
             localStorage.setItem('currentUser', response.data.loginUser.user.id);
             localStorage.setItem('currentUserName', response.data.loginUser.user.user_name);
+            localStorage.setItem('currentUserEmail', response.data.loginUser.user.email);
             console.log(localStorage.getItem('currentUserName'), "logged in as: ", localStorage.getItem('currentUser'));
             navigate('/dashboard');
         } catch (err) {
@@ -40,12 +41,10 @@ function Login() {
     return (
         <div className="login-main-container">
             <form onSubmit={handleSubmit} className="login-main-container">
-                <label className="login-label">Username</label>
                 <input type="text" name="user_name" value={formData.user_name} onChange={handleChange} required
-                       className='input-rounded'/>
-                <label className="login-label">Password</label>
+                       className='input-rounded' placeholder="Username"/>
                 <input type="password" name="password" value={formData.password} onChange={handleChange} required
-                       className='input-rounded'/>
+                       className='input-rounded' placeholder="Password"/>
                 <button type="submit" disabled={loading} className="button-color">Log in</button>
                 {error && <p>{error.message}</p>}
             </form>

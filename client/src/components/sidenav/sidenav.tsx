@@ -17,13 +17,18 @@ function SideNav() {
         navigate('/dashboard')
     }
 
+    function handleNavigateToUserSettings() {
+        navigate('/userSettings')
+    }
+
+
     return(
         <div className='div-nav-main'>
             <div className="sidenav-icon-container" id="home-icon-div" onClick={handleNavigateToDashBoard}>
                 <LuHome className="sidebar-icon"/>
                 <p className="sidenav-icon-text">Home</p>
             </div>
-            <div className="sidenav-icon-container" id="user-icon-div">
+            <div className="sidenav-icon-container" id="user-icon-div" onClick={handleNavigateToUserSettings}>
                 <LuUser className="sidebar-icon"/>
                 <p className="sidenav-icon-text">User</p>
             </div>

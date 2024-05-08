@@ -1,7 +1,8 @@
 import {GraphQLError} from 'graphql';
-import {User, UserInput, LoginInput, QueryByIdInput} from '../../types/typeDefs';
+import {User, UserInput, LoginInput, QueryByIdInput, TabInput, Tab, UserModifyInput} from '../../types/typeDefs';
 import userModel from "../models/userModel";
 import bcrypt from 'bcrypt';
+import tabModel from "../models/tabModel";
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
@@ -52,6 +53,27 @@ export default {
                 token,
                 user
             };
-        }
+        },
+        modifyUser: async (
+            _parent: undefined,
+            args: { id: string, input: UserModifyInput },
+        ): Promise<User | null> => {
+            const hashedPassword = await bcrypt.hash(args.input.password, 10);
+            const updatedUser = await userModel.findByIdAndUpdate(
+                args.id,
+                {
+                    $set: {
+                        user_name: args.input.user_name,
+                        email: args.input.email,
+                        password: hashedPassword
+                    }
+                },
+                { new: true }
+            );
+            if (!updatedUser) {
+                throw new GraphQLError("No user found with the given ID");
+            }
+            return updatedUser;
+        },
     }
 };

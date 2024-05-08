@@ -7,14 +7,15 @@ import {useParams} from "react-router-dom";
 import {useMutation, useQuery} from "@apollo/client";
 import {FIND_TAB_BY_ID} from "../graphql/tabTypes";
 import SideNav from "../../components/sidenav/sidenav";
+import styled from 'styled-components';
 
 const TabCreator: React.FC = () => {
     const [noteState, setNoteState] = useState(new Tablature());
     const [tablatureDisplay, setTablatureDisplay] = useState<string>("");
     const tabId = useParams();
 
-    const { loading, error, data } = useQuery(FIND_TAB_BY_ID, {
-        variables: { input: { id: tabId.id } }
+    const {loading, error, data} = useQuery(FIND_TAB_BY_ID, {
+        variables: {input: {id: tabId.id}}
     });
 
     const updateNoteStateFromGraphQL = (tabData: any) => {
@@ -85,7 +86,24 @@ const TabCreator: React.FC = () => {
         );
     };
 
+    const StyledPre = styled.pre`
+      span.small {
+        font-size: 0.5em; // half size for double character notes
+      }
+
+      span.regular {
+        font-size: 1em; // regular size for single character notes
+      }
+    `;
+
+    const TablatureDisplay = (tablatureDisplay: any) => (
+        <StyledPre dangerouslySetInnerHTML={{__html: tablatureDisplay}}/>
+    );
+
     if (loading) return <p>Loading...</p>;
+
+    console.log(tablatureDisplay);
+
 
     return (
         <div className="tab-editor-full-container">
@@ -95,8 +113,9 @@ const TabCreator: React.FC = () => {
                 <h3>Note Editor</h3>
                 {Array.from({length: 6}, (_, i) => renderStringFields(i + 1))}
                 <div className="tablature-display">
-                    <pre>{tablatureDisplay}</pre>
-                    <button className="button-color" onClick={() => downloadPdfFile(tablatureDisplay)}>Download PDF</button>
+                    <StyledPre dangerouslySetInnerHTML={{ __html: tablatureDisplay }} />
+                    <button className="button-color" onClick={() => downloadPdfFile(tablatureDisplay)}>Download PDF
+                    </button>
                 </div>
             </div>
         </div>

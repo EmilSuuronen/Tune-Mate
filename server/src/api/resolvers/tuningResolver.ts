@@ -50,7 +50,7 @@ export default {
             _parent: undefined,
             args: { id: string, input: TuningInput },
         ): Promise<Tuning | null> => {
-            console.log("args.id: ",args.id)
+            console.log("args.id: ", args.id)
             console.log("args.input: ", args.input)
             const updatedTuning = await tuningModel.findByIdAndUpdate(
                 args.id,

@@ -4,6 +4,7 @@ import {useMutation} from "@apollo/client";
 import {CREATE_TAB, DELETE_TAB, MODIFY_TAB} from "../../views/graphql/tabTypes";
 import Modal from "../popupModal/popupModal";
 import {useNavigate, useParams} from 'react-router-dom';
+import isLoggedIn from "../../script/isLoggedIn";
 
 function TopAppBar(noteState: any) {
 
@@ -96,9 +97,10 @@ function TopAppBar(noteState: any) {
             }
         } else {
             try {
-                await createTab({variables: {input: formData}});
+                const response = await createTab({variables: {input: formData}});
                 console.log('formdata:', formData);
                 setModalOpen(false);
+                navigate("/tabCreator/" + response.data.createTab.id);
             } catch (err) {
                 console.error('Error creating Tablature:', err);
                 setModalOpen(false);
@@ -132,8 +134,12 @@ function TopAppBar(noteState: any) {
                        id='input-project-tempo'
                        placeholder="tempo" required
                 />
-                <button className="button-color" id="button-save" onClick={handleOpenModal} type="submit">Save</button>
-                <button className="button-color-red" id="button-delete"onClick={handleOpenDeleteModal} type="submit">Delete</button>
+                {isLoggedIn() && (
+                    <>
+                        <button className="button-color" id="button-save" onClick={handleOpenModal} type="submit">Save</button>
+                        <button className="button-color-red" id="button-delete" onClick={handleOpenDeleteModal} type="submit">Delete</button>
+                    </>
+                )}
             </form>
             <Modal
                 isOpen={modalOpen}

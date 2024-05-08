@@ -11,6 +11,7 @@ import {AppCard} from "../../components/appCard/appCard";
 import {TabAppCard} from "../../components/appCard/tabAppCard";
 import {TuningAppCard} from "../../components/appCard/tuningAppCard";
 import {FIND_TUNING_BY_USER} from "../graphql/tuningTypes";
+import isLoggedIn from "../../script/isLoggedIn";
 import TuningItem from "../../components/dashBoardItemCard/tuningItemCard";
 
 function DashBoard() {
@@ -52,7 +53,7 @@ function DashBoard() {
                 <div className="div-tab-cards-horizontal">
                     <ButtonCreateNew/>
                     {tabsByUser.length < 1 ? (
-                        <i className="info-text-nocontent"> No tabs yet. Get started by creating one.</i> ) : (
+                        <i className="info-text-nocontent">{isLoggedIn() ? "No tabs yet. Get started by creating one" : "Log in to save tabs"}</i>) : (
                         <div className="div-tab-cards-vertical">
                             <div className="div-item-card-main" id="titles">
                                 <div className="div-item-card-element" id="name">
@@ -74,7 +75,7 @@ function DashBoard() {
                 <div className="div-tab-cards-horizontal">
                     <ButtonCreateNew/>
                     {tuningsByUser.length < 1 ? (
-                        <i className="info-text-nocontent"> No Tunings yet. Get started by creating one.</i> ) : (
+                        <i className="info-text-nocontent">{isLoggedIn() ? "No tunings yet. Get started by creating one" : "Log in to save tunings"}</i>) : (
                         <div className="div-tab-cards-vertical">
                             <div className="div-item-card-main" id="titles">
                                 <div className="div-item-card-element" id="name">

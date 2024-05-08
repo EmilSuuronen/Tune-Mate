@@ -1,0 +1,23 @@
+#form-content.register-main-container {
+    width: 30%;
+}
+
+.div-user-settings-main {
+    display: flex;
+    height: 100%;
+    min-height: 100vh;
+}
+
+.
+
+.input-rounded {
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+#create-account.button-color {
+    width: 100%;
+    padding: 10px;
+}

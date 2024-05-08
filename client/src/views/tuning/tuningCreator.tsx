@@ -8,6 +8,7 @@ import TUNING_NOTES from "./tuningHelpers";
 import TuningModal from "./tuningModal";
 import {MdMusicNote} from "react-icons/md";
 import Modal from "../../components/popupModal/popupModal";
+import isLoggedIn from "../../script/isLoggedIn";
 
 export default function TuningCreator() {
     const tuningId = useParams();
@@ -129,7 +130,9 @@ export default function TuningCreator() {
                             ))}
                         </select>
                     </label>
-                    <button className="button-color" id="save-button" onClick={handleOpenSaveModal} disabled={createTuningLoading}>save</button>
+                    {isLoggedIn() && (
+                        <button className="button-color" id="save-button" onClick={handleOpenSaveModal} disabled={createTuningLoading}>save</button>
+                    )}
                 </div>
                 <h1> Tuning Creator</h1>
                 <div className="tuner-buttons-container">
@@ -161,7 +164,7 @@ export default function TuningCreator() {
                 </div>
             </div>
             <Modal
-                    isOpen={saveModalOpen}
+                isOpen={saveModalOpen}
                 text="Confirm Save?"
                 onCancel={() => setSaveModalOpen(false)}
                 onOk={handleSubmit}
