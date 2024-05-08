@@ -3,7 +3,7 @@ import { setContext } from '@apollo/client/link/context';
 
 //'http://localhost:4000/graphql'
 const httpLink = createHttpLink({
-    uri: 'http://localhost:4000/graphql',
+    uri: 'https://tune-mate.azurewebsites.net/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {

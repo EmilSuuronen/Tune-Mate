@@ -11,6 +11,15 @@
     padding: 12px;
 }
 
+.dashboard-main-title {
+    font-size: 48px;
+}
+
+.div-dashboard-section {
+    margin: 12px;
+    border-bottom: #545454 1px solid;
+}
+
 .div-tab-cards-horizontal {
     display: flex;
     overflow: auto;
@@ -51,8 +60,6 @@
     width: 100%;
     justify-content: start;
     align-items: start;
-    border-top: 1px solid #595959;
-    border-bottom: 1px solid #595959;
     overflow: auto;
     max-height: 500px;
     padding: 12px;

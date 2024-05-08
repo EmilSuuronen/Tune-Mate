@@ -19,11 +19,11 @@ function DashBoard() {
     const [tabsByUser, setTabsByUser] = useState<Tab[]>([]);
     const [tuningsByUser, setTuningsByUser] = useState<Tuning[]>([]);
 
-    const {loading: loadingTabs, data: tabsData} = useQuery(FIND_TAB_BY_USER, {
+    const {loading: loadingTabs, data: tabsData, refetch: refetchTabs} = useQuery(FIND_TAB_BY_USER, {
         variables: {input: {input: userId}}
     });
 
-    const {loading: loadingTunings, data: tuningsData} = useQuery(FIND_TUNING_BY_USER, {
+    const {loading: loadingTunings, data: tuningsData, refetch: refetchTunings} = useQuery(FIND_TUNING_BY_USER, {
         variables: {input: {id: userId}}
     });
 
@@ -34,7 +34,12 @@ function DashBoard() {
         if (tuningsData && tuningsData.findTuningsByOwner) {
             setTuningsByUser(tuningsData.findTuningsByOwner);
         }
-    }, [tabsData, tabsByUser, tuningsData, tuningsByUser]);
+    }, [tabsData, tuningsData]);
+
+    useEffect(() => {
+        refetchTabs();
+        refetchTunings();
+    }, []);
 
     if (loadingTabs || loadingTunings) return <p>Loading...</p>;
 
@@ -42,53 +47,59 @@ function DashBoard() {
         <div className="div-dashboard-flex">
             <SideNav/>
             <div className="div-dashboard-flex-vertical">
-                <h1>Welcome to TuneMate{", " + localStorage.getItem("currentUserName")}</h1>
-                <h2>Apps</h2>
-                <div className="div-tab-cards-horizontal" id="apps">
-                    <AppCard/>
-                    <TabAppCard/>
-                    <TuningAppCard/>
+                <h1 className="dashboard-main-title">Welcome to TuneMate, {isLoggedIn() ? localStorage.getItem("currentUserName") : " Quest"}</h1>
+                <div className="div-dashboard-section">
+                    <h2>Apps</h2>
+                    <div className="div-tab-cards-horizontal" id="apps">
+                        <AppCard/>
+                        <TabAppCard/>
+                        <TuningAppCard/>
+                    </div>
                 </div>
-                <h2>Tabs</h2>
-                <div className="div-tab-cards-horizontal">
-                    <ButtonCreateNew navLocation="/tabCreator"/>
-                    {tabsByUser.length < 1 ? (
-                        <i className="info-text-nocontent">{isLoggedIn() ? "No tabs yet. Get started by creating one" : "Log in to save tabs"}</i>) : (
-                        <div className="div-tab-cards-vertical">
-                            <div className="div-item-card-main" id="titles">
-                                <div className="div-item-card-element" id="name">
-                                    <b className="item-card-name" id="titles">Name</b>
+                <div className="div-dashboard-section">
+                    <h2>Tabs</h2>
+                    <div className="div-tab-cards-horizontal">
+                        <ButtonCreateNew navLocation="/tabCreator"/>
+                        {tabsByUser.length < 1 ? (
+                            <i className="info-text-nocontent">{isLoggedIn() ? "No tabs yet. Get started by creating one" : "Log in to save tabs"}</i>) : (
+                            <div className="div-tab-cards-vertical">
+                                <div className="div-item-card-main" id="titles">
+                                    <div className="div-item-card-element" id="name">
+                                        <b className="item-card-name" id="titles">Name</b>
+                                    </div>
+                                    <div className="div-item-card-element" id="tempo">
+                                        <b>tempo</b>
+                                    </div>
+                                    <div className="div-item-card-element" id="delete">
+                                    </div>
                                 </div>
-                                <div className="div-item-card-element" id="tempo">
-                                    <b>tempo</b>
-                                </div>
-                                <div className="div-item-card-element" id="delete">
-                                </div>
+                                {tabsByUser.map((tab) => (
+                                    <ItemCard key={tab.id} cardData={tab}/>
+                                ))}
                             </div>
-                            {tabsByUser.map((tab) => (
-                                <ItemCard key={tab.id} cardData={tab}/>
-                            ))}
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
-                <h2>Tunings</h2>
-                <div className="div-tab-cards-horizontal">
-                    <ButtonCreateNew navLocation="/tuningCreator"/>
-                    {tuningsByUser.length < 1 ? (
-                        <i className="info-text-nocontent">{isLoggedIn() ? "No tunings yet. Get started by creating one" : "Log in to save tunings"}</i>) : (
-                        <div className="div-tab-cards-vertical">
-                            <div className="div-item-card-main" id="titles">
-                                <div className="div-item-card-element" id="name">
-                                    <b className="item-card-name" id="titles">Name</b>
+                <div className="div-dashboard-section">
+                    <h2>Tunings</h2>
+                    <div className="div-tab-cards-horizontal">
+                        <ButtonCreateNew navLocation="/tuningCreator"/>
+                        {tuningsByUser.length < 1 ? (
+                            <i className="info-text-nocontent">{isLoggedIn() ? "No tunings yet. Get started by creating one" : "Log in to save tunings"}</i>) : (
+                            <div className="div-tab-cards-vertical">
+                                <div className="div-item-card-main" id="titles">
+                                    <div className="div-item-card-element" id="name">
+                                        <b className="item-card-name" id="titles">Name</b>
+                                    </div>
+                                    <div className="div-item-card-element" id="delete">
+                                    </div>
                                 </div>
-                                <div className="div-item-card-element" id="delete">
-                                </div>
+                                {tuningsByUser.map((tuning) => (
+                                    <TuningItem key={tuning.id} cardData={tuning}/>
+                                ))}
                             </div>
-                            {tuningsByUser.map((tuning) => (
-                                <TuningItem key={tuning.id} cardData={tuning}/>
-                            ))}
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
